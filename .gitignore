@@ -4,3 +4,6 @@ composer.phar
 composer.lock
 .DS_Store
 /.idea
+/app/config/local
+/app/config/production
+_IDE_helper.php

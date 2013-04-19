@@ -33,15 +33,26 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest()) return Redirect::route('login');
+Route::filter('auth', function () {
+    if (!Sentry::check()) return Redirect::action('AccountController@getLogin');
 });
 
 
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
+});
+
+Route::filter('admin', function () {
+    $user = Sentry::getUser();
+
+    // Find the Administrator group
+    $admin = Sentry::getGroupProvider()->findByName('Admins');
+
+    // Check if the user is in the administrator group
+    if (!$user->inGroup($admin)) {
+        return Redirect::action('AccountController@getLogin');
+    }
 });
 
 /*

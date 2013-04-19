@@ -1,5 +1,8 @@
 <?php
 
+Event::listen('user.register', 'UserHandler@onRegister');
+Event::listen('user.forgot', 'UserHandler@onForgot');
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -17,6 +20,7 @@ ClassLoader::addDirectories(array(
 	app_path().'/controllers',
 	app_path().'/models',
 	app_path().'/database/seeds',
+    app_path().'/handlers',
 
 ));
 

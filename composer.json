@@ -1,6 +1,9 @@
 {
 	"require": {
-		"laravel/framework": "4.0.*"
+		"laravel/framework": "4.0.*",
+        "barryvdh/laravel-ide-helper": "dev-master",
+        "cartalyst/sentry": "2.0.*",
+        "aws/aws-sdk-php-laravel": "1.*"
 	},
 	"autoload": {
 		"classmap": [
