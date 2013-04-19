@@ -30,6 +30,58 @@ class ApiObjectController extends BaseController {
      * @return Response
      */
     public function store() {
+        $newName = self::generateName();
+
+        $file = Input::file('file')->move(base_path().DIRECTORY_SEPARATOR.'storage', $newName);
+        $apikey = Input::get('key');
+        $return = Input::get('return', 'json');
+
+        $validator = Validator::make(
+            array(
+                'key' => $apikey,
+                'file' => $file
+            ),
+            array(
+                'key' => 'required',
+                'file' => 'required'
+            )
+        );
+
+        if($validator->fails()) {
+            return Response::json($validator->messages()->toArray());
+        }
+
+        // @todo validation
+
+        // Get the data we'll need
+        $user = Sentry::getUserProvider()->findById(Key::where('key', $apikey)->first()->user_id);
+        $path = $file;
+        $fileInfo = $file->getFileInfo();
+
+        $object = new Object();
+
+        $object->name = $newName;
+        $object->user_id = $user->id;
+        $object->public = true;
+        $object->mime = $file->getMimeType();
+        $object->original = Input::file('file')->getClientOriginalName();
+        $object->extension = Input::file('file')->getClientOriginalExtension();
+        $object->size = $file->getSize();
+        $object->path = $path;
+        $object->file = json_encode(self::fileInfo($fileInfo));
+
+        $object->save();
+
+        Queue::push('UploadFile', array('name' => $newName));
+
+        if($return === 'json') {
+            return Response::json(array('id' => $newName));
+        } elseif($return === 'text') {
+            echo URL::to('/e/' . $newName);
+        }
+
+
+        /*
         // if not Input::file it might be file_get_contents('php://input')
 
         if(Input::hasFile('file')) {
@@ -89,7 +141,7 @@ class ApiObjectController extends BaseController {
         } elseif($return === 'text') {
             echo URL::to('/e/' . $newName);
         }
-
+        */
     }
 
     /**
