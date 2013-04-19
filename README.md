@@ -1,4 +1,3 @@
-getstorage.net
-==============
+## GetStorage
 
-Homepage for Storage
+This is the code behind getstorage.net
