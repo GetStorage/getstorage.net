@@ -43,6 +43,14 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('api', function() {
+    $key = Key::where('key', Input::get('key'))->first();
+
+    if($key === null) {
+        App::abort(401, 'Invalid Key');
+    }
+});
+
 Route::filter('admin', function () {
     $user = Sentry::getUser();
 
