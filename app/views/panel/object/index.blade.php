@@ -29,7 +29,7 @@ My Stuff
                 <td>{{ObjectHit::where('object_id', $object->id)->count()}}</td>
                 <td>{{$object->size}}</td>
                 <td>{{$object->created_at}}</td>
-                <td><a href="/panel/thing/{{$object->name}}" class="btn btn-primary btn-mini">Analytics</a> <button class="btn btn-danger btn-mini">Delete</button></td>
+                <td><a href="/panel/object/{{$object->name}}" class="btn btn-primary btn-mini">Analytics</a> <button class="btn btn-danger btn-mini">Delete</button></td>
             </tr>
             @endforeach
             </tbody>

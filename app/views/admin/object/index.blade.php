@@ -31,7 +31,7 @@ Admin - Objects
             <td>{{$object->size}}</td>
             <td>{{$object->size * ObjectHit::where('object_id', $object->id)->count()}}</td>
             <td>{{$object->created_at}}</td>
-            <td><a href="/admin/thing/{{$object->name}}" class="btn btn-primary btn-mini">Analytics</a> <button class="btn btn-danger btn-mini">Delete</button></td>
+            <td><a href="/admin/object/{{$object->name}}" class="btn btn-primary btn-mini">Analytics</a> <button class="btn btn-danger btn-mini">Delete</button></td>
         </tr>
         @endforeach
     </tbody>

@@ -9,9 +9,9 @@ class AdminObjectController extends BaseController {
 	 */
 	public function index()
 	{
-		$things = Object::all();
+		$objects = Object::all();
 
-        return View::make('admin.thing.index', array('things' => $things));
+        return View::make('admin.object.index', array('objects' => $objects));
 	}
 
 	/**
@@ -45,7 +45,7 @@ class AdminObjectController extends BaseController {
 		$object = Object::where('name', $name)->first();
         $analytics = ObjectHit::where('object_id', $object->id)->get();
 
-        return View::make('admin.thing.thing', array('object' => $object, 'analytics' => $analytics));
+        return View::make('admin.object.show', array('object' => $object, 'analytics' => $analytics));
 	}
 
 	/**

@@ -5,21 +5,21 @@ class UploadFile {
     
     public function fire($job, $data) 
     {
-        $thing = Thing::where('name', $data['name'])->first();
+        $object = Object::where('name', $data['name'])->first();
 
         // Take file
-        $path = base_path().DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.$thing->name;
+        $path = base_path().DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.$object->name;
 
         // Upload to S3
         $s3 = App::make('aws')->get('s3');
         $s3->putObject(array(
             'Bucket' => 'storag',
-            'Key' => $thing->name,
+            'Key' => $object->name,
             'SourceFile' => $path,
         ));
 
-        $thing->s3 = true;
-        $thing->save();
+        $object->s3 = true;
+        $object->save();
 
 
         $job->delete();

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Panel - Things
+Panel - Objects
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@ Panel - Things
     @include('panel.partial.navigation')
     <div class="span9">
 
-        <h2>{{$thing->name}}</h2>
+        <h2>{{$object->name}}</h2>
         <p>We'll be adding more to this page soon!</p>
 
         <table class="table">
