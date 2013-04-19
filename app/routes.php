@@ -22,7 +22,7 @@ Route::group(array('prefix' => 'api/v1', 'before' => 'api'), function () {
     Route::resource('thing', 'ApiObjectController'); // @todo remove
     Route::resource('object', 'ApiObjectController');
 });
-Route::group(array('domain' => 'api.stor.ag'), function () {
+Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v1', 'before' => 'api'), function () {
     Route::resource('object', 'ApiObjectController');
 });
 
