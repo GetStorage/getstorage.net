@@ -18,16 +18,17 @@ Route::controller('/account', 'AccountController');
 
 Route::get('/e/{id}', 'ObjectController@getObject');
 
-Route::group(array('prefix' => 'api/v1', 'before' => 'api'), function()
-{
+Route::group(array('prefix' => 'api/v1', 'before' => 'api'), function () {
     Route::resource('thing', 'ApiObjectController'); // @todo remove
+    Route::resource('object', 'ApiObjectController');
+});
+Route::group(array('domain' => 'api.stor.ag'), function () {
     Route::resource('object', 'ApiObjectController');
 });
 
 
-Route::group(array('prefix' => 'panel', 'before' => 'auth'), function()
-{
-    Route::get('/', function() {
+Route::group(array('prefix' => 'panel', 'before' => 'auth'), function () {
+    Route::get('/', function () {
         return Redirect::to('/panel/user');
     });
     Route::controller('user', 'UserHomeController');
@@ -37,8 +38,7 @@ Route::group(array('prefix' => 'panel', 'before' => 'auth'), function()
     Route::get('settings', 'UserHomeController@getSettings');
 });
 
-Route::group(array('prefix' => 'admin', 'before' => 'admin'), function()
-{
+Route::group(array('prefix' => 'admin', 'before' => 'admin'), function () {
     Route::resource('object', 'AdminObjectController');
     Route::resource('user', 'AdminUserController');
 });
