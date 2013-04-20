@@ -77,7 +77,7 @@ class ApiObjectController extends BaseController {
         if($return === 'json') {
             return Response::json(array('id' => $newName));
         } elseif($return === 'text') {
-            echo URL::to('/e/' . $newName);
+            echo 'http://stor.ag/e/' . $newName;
         }
 
 
