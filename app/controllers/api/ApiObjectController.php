@@ -30,68 +30,29 @@ class ApiObjectController extends BaseController {
      * @return Response
      */
     public function store() {
-        $newName = self::generateName();
+        $postBody = true;
+        $original = $extension = null;
 
-        $file = Input::file('file')->move(base_path().DIRECTORY_SEPARATOR.'storage', $newName);
-        $apikey = Input::get('key');
-        $return = Input::get('return', 'json');
-
-        $validator = Validator::make(
-            array(
-                'key' => $apikey,
-                'file' => $file
-            ),
-            array(
-                'key' => 'required',
-                'file' => 'required'
-            )
-        );
-
-        if($validator->fails()) {
-            return Response::json($validator->messages()->toArray());
-        }
-
-        // @todo validation
-
-        // Get the data we'll need
-        $user = Sentry::getUserProvider()->findById(Key::where('key', $apikey)->first()->user_id);
-        $path = $file;
-        $fileInfo = $file->getFileInfo();
-
-        $object = new Object();
-
-        $object->name = $newName;
-        $object->user_id = $user->id;
-        $object->public = true;
-        $object->mime = $file->getMimeType();
-        $object->original = Input::file('file')->getClientOriginalName();
-        $object->extension = Input::file('file')->getClientOriginalExtension();
-        $object->size = $file->getSize();
-        $object->path = $path;
-        $object->file = json_encode(self::fileInfo($fileInfo));
-
-        $object->save();
-
-        Queue::push('UploadFile', array('name' => $newName));
-
-        if($return === 'json') {
-            return Response::json(array('id' => $newName));
-        } elseif($return === 'text') {
-            echo 'http://stor.ag/e/' . $newName;
-        }
-
-
-        /*
         // if not Input::file it might be file_get_contents('php://input')
-
         if(Input::hasFile('file')) {
             $file = file_get_contents(Input::file('file')->getRealPath());
             $mime = Input::file('file')['mime_type'];
+
+            $original = Input::file('file')->getClientOriginalName();
+            $extension = Input::file('file')->getClientOriginalExtension();
         } else {
+            $postBody = true;
+
             // Must be a post body or error
             $file = file_get_contents('php://input');
             $mime = (Request::header('Content-Type') ? Request::header('Content-Type') : 'application/octet-stream');
 
+            if(Input::get('filename')) {
+                $filename = Input::get('filename');
+
+                $original = $filename;
+                $extension = (explode('.', $filename)[1] ? explode('.', $filename)[1] : null);
+            }
 
             if(!$file) {
                 App::abort(400, 'Didn\'t send a proper file.');
@@ -118,30 +79,30 @@ class ApiObjectController extends BaseController {
         $path = $file;
         $fileInfo = $file->getFileInfo();
 
-        var_dump($file);
-
         $object = new Object();
 
         $object->name = $newName;
         $object->user_id = $user->id;
         $object->public = true;
         $object->mime = $mime;
-        $object->original = Input::file('file')->getClientOriginalName();
-        $object->extension = Input::file('file')->getClientOriginalExtension();
+        $object->original = $original;
+        $object->extension = $extension;
         $object->size = $file->getSize();
         $object->path = $path;
         $object->file = json_encode(self::fileInfo($fileInfo));
 
         $object->save();
 
-        Queue::push('UploadFile', array('name' => $newName));
+        // @todo do this better
+        if(App::environment() != 'local') {
+            Queue::push('UploadFile', array('name' => $newName));
+        }
 
         if($return === 'json') {
             return Response::json(array('id' => $newName));
         } elseif($return === 'text') {
             echo URL::to('/e/' . $newName);
         }
-        */
     }
 
     /**

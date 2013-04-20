@@ -19,7 +19,7 @@ class CreateStuff extends Migration {
                 $table->integer('user_id')->unsigned();
                 $table->boolean('public');
                 $table->string('mime');
-                $table->string('extension');
+                $table->string('extension')->nullable();
                 $table->integer('size');
                 $table->string('path');
                 $table->text('file');
