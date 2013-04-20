@@ -36,7 +36,7 @@ class ApiObjectController extends BaseController {
         // if not Input::file it might be file_get_contents('php://input')
         if(Input::hasFile('file')) {
             $file = file_get_contents(Input::file('file')->getRealPath());
-            $mime = Input::file('file')['mime_type'];
+            $mime = Input::file('file')->getMimeType();
 
             $original = Input::file('file')->getClientOriginalName();
             $extension = Input::file('file')->getClientOriginalExtension();
