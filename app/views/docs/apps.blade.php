@@ -44,7 +44,7 @@ Apps
 
         <br class="clearfix">
 
-        <a href="http://stor.ag/e/edaf8f">Windows</a> - <a href="https://github.com/TheEndermen/Store.NET/">Source</a>
+        <a href="http://stor.ag/e/bee1c0">Windows</a> - <a href="https://github.com/TheEndermen/Store.NET/">Source</a>
     </div>
 
 </div>

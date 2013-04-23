@@ -63,7 +63,10 @@
                     <!--header rightside-->
                     <div class="span4">
                         <div class="social-media pull-right">
-                            <a href="https://twitter.com/GetStorage" target="_blank"><i class="icon-twitter"></i></a> <a href="https://www.statuscake.com/public/site/37016" target="_blank"><i class="icon-bar-chart"></i></a>
+                            <a href="https://twitter.com/GetStorage" title="Follow us on Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                            <a href="http://blog.getstorage.net/" title="Read our blog on Tumblr" target="_blank"><i class="icon-book"></i></a>
+                            <a href="https://www.statuscake.com/public/site/37016" title="Site Uptime and Status" target="_blank"><i class="icon-bar-chart"></i></a>
+                            <a href="https://github.com/GetStorage/getstorage.net" title="Open source on GitHub!" target="_blank"><i class="icon-github"></i></a>
                         </div>
                     </div>
                 </div>
