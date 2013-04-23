@@ -4,6 +4,7 @@
         "barryvdh/laravel-ide-helper": "dev-master",
         "cartalyst/sentry": "2.0.*",
         "aws/aws-sdk-php-laravel": "1.*",
+        "benthedesigner/dropbox": "*"
 	},
 	"autoload": {
 		"classmap": [

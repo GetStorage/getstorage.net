@@ -2,6 +2,6 @@
 
 class Object extends Eloquent {
 
-    protected $hidden = array('id','user_id','path','file');
+    protected $hidden = array('id','user_id','path','file','s3');
 
 }

@@ -38,6 +38,9 @@ Route::group(array('prefix' => 'panel', 'before' => 'auth'), function () {
     Route::resource('object', 'UserObjectController');
     Route::resource('keys', 'UserKeysController');
 
+    // Apps
+    //Route::controller('dropbox', 'UserDropboxController');
+
     Route::get('settings', 'UserHomeController@getSettings');
 });
 

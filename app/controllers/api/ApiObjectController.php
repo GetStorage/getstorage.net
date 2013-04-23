@@ -7,7 +7,7 @@ class ApiObjectController extends BaseController {
     }
 
     /**
-     * Display a listing of the resource.
+     * Get all objects from the user
      *
      * @return Response
      */
@@ -16,16 +16,7 @@ class ApiObjectController extends BaseController {
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create() {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Store an object
      *
      * @return Response
      */
