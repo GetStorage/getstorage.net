@@ -23,7 +23,7 @@
                 <li>50MB Max Filesize</li>
                 <li>1GB Total Account Storage</li>
             </ul>
-            <a class="btn btn-primary">Sign Up</a></div>
+            <a href="/account/register" class="btn btn-primary">Sign Up</a></div>
     </div>
     <div class="span4">
         <div class="well active">
@@ -36,7 +36,7 @@
                 <li>500MB Max Filesize</li>
                 <li>10GB Total Account Storage</li>
             </ul>
-            <a class="btn btn-primary">Sign Up</a></div>
+            <a href="/account/register" class="btn btn-primary">Sign Up</a></div>
     </div>
 </div>
 @stop
