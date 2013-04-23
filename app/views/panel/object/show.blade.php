@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Panel - Objects
+{{$obect->name}}
 @stop
 
 @section('content')

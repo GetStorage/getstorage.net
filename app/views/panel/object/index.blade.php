@@ -1,10 +1,11 @@
 @extends('layouts.master')
 
 @section('title')
-My Stuff
+My Objects
 @stop
 
 @section('content')
+<p>Please note, while we work on getting click tracking working across our cache servers, analytics will be unstable.</p>
 
 <div class="row">
     @include('panel.partial.navigation')
@@ -24,7 +25,7 @@ My Stuff
             <tbody>
             @foreach($objects as $object)
             <tr>
-                <td><span class="<?php if($object->s3) echo 'glyphicon glyphicon-globe'; ?>"></span></td>
+                <td><span class="<?php if($object->s3) echo 'icon-globe'; ?>"></span></td>
                 <td><a href="/e/{{$object->name}}" target="_blank">{{$object->name}}</a></td>
                 <td>{{ObjectHit::where('object_id', $object->id)->count()}}</td>
                 <td>{{$object->size}}</td>

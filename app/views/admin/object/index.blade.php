@@ -23,7 +23,7 @@ Admin - Objects
     <tbody>
         @foreach($objects as $object)
         <tr>
-            <td><span class="<?php if($object->s3) echo 'glyphicon glyphicon-globe'; ?>"></span></td>
+            <td><span class="<?php if($object->s3) echo 'icon-globe'; ?>"></span></td>
             <td><a href="/e/{{$object->name}}" target="_blank">{{$object->name}}</a></td>
             <td>{{htmlentities($object->original)}}</td>
             <td>{{Sentry::getUserProvider()->findById($object->user_id)->username}}</td>
