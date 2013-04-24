@@ -37,24 +37,24 @@ class AccountController extends BaseController
 
             return Redirect::to('');
         } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
-            echo 'Login field is required.';
+            return Redirect::to('account/login')->withErrors(['Login field is required.']);
         }
         catch (Cartalyst\Sentry\Users\PasswordRequiredException $e) {
-            echo 'Password field is required.';
+            return Redirect::to('account/login')->withErrors(['Password field is required.']);
         }
         catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-            echo 'User was not found.';
+            return Redirect::to('account/login')->withErrors(['User was not found.']);
         }
         catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {
-            echo 'User is not activated.';
+            return Redirect::to('account/login')->withErrors(['User is not activated.']);
         }
 
-// The following is only required if throttle is enabled
+        // The following is only required if throttle is enabled
         catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
-            echo 'User is suspended.';
+            return Redirect::to('account/login')->withErrors(['User is suspended.']);
         }
         catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
-            echo 'User is banned.';
+            return Redirect::to('account/login')->withErrors(['User is banned.']);
         }
     }
 
@@ -95,7 +95,7 @@ class AccountController extends BaseController
             return Redirect::to('account/thanks');
 
         } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
-            echo 'User with this login already exists.';
+            return Redirect::to('account/register')->withErrors(['User with this login already exists.']);
         }
 
     }
@@ -120,10 +120,10 @@ class AccountController extends BaseController
                 return Redirect::to('account/login');
             }
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-            echo 'User was not found.';
+            return Redirect::to('account/register')->withErrors(['User was not found.']);
         }
         catch (Cartalyst\SEntry\Users\UserAlreadyActivatedException $e) {
-            echo 'User is already activated.';
+            return Redirect::to('account/login')->withErrors(['User is already activated.']);
         }
     }
 
@@ -156,7 +156,7 @@ class AccountController extends BaseController
 
             return Redirect::to('account/resetting');
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-            echo 'User was not found.';
+            return Redirect::to('account/forgot')->withErrors(['User was not found.']);
         }
     }
 
@@ -202,10 +202,10 @@ class AccountController extends BaseController
                     return Redirect::to('account/forgot');
                 }
             } else {
-                // The provided password reset code is Invalid
+                return Redirect::to(URL::to('account/reset', array($input['email'], $input['code'])))->withErrors(['Invalid reset key.']);
             }
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-            echo 'User was not found.';
+            return Redirect::to(URL::to('account/reset', array($input['email'], $input['code'])))->withErrors(['User was not found.']);
         }
     }
 
