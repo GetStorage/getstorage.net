@@ -85,7 +85,7 @@
                     <li>{{Html::linkAction('AccountController@getLogin', 'Login', null, array('class' => 'btn btn-primary login'))}}</li>
                     @else
                     @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('Admins')))
-                    <li>{{Html::linkAction('AdminHomeController', 'Admin', null, array('class' => 'btn btn-danger'))}}</li>
+                    <li>{{Html::linkAction('AdminHomeController@getIndex', 'Admin', null, array('class' => 'btn btn-danger'))}}</li>
                     <li class="divider-vertical"></li>
                     @endif
                     <li>{{Html::linkAction('UserHomeController@getIndex', 'Panel', null, array('class' => 'btn btn-primary signup'))}}</li>

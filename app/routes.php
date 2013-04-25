@@ -47,6 +47,7 @@ Route::group(array('prefix' => 'panel', 'before' => 'auth'), function () {
 });
 
 Route::group(array('prefix' => 'admin', 'before' => 'admin'), function () {
+    Route::controller('home', 'AdminHomeController');
     Route::resource('object', 'AdminObjectController');
     Route::resource('user', 'AdminUserController');
 });
