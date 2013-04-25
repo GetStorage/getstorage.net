@@ -28,7 +28,7 @@ Admin - Objects
             <tr>
                 <td><span class="<?php if($object->s3) echo 'icon-globe'; ?>"></span></td>
                 <td><a href="/e/{{$object->name}}" target="_blank">{{$object->name}}</a></td>
-                <td>{{htmlentities($object->original)}}</td>
+                <td>{{htmlentities($object->shortOriginal())}}</td>
                 <td>{{Sentry::getUserProvider()->findById($object->user_id)->username}}</td>
                 <td>{{ObjectHit::where('object_id', $object->id)->count()}}</td>
                 <td>{{$object->size}}</td>
