@@ -143,7 +143,19 @@ class ApiObjectController extends BaseController {
      * @return Response
      */
     public function destroy($id) {
-        //
+        $key = Input::get('key');
+
+        $user = Sentry::getUserProvider()->findById(Key::where('key', $key)->first()->user_id);
+        $object = Object::where('name', $id)->first();
+
+        if($object->user_id != $user->id) {
+            return Response::json(array('message' => 'Key invalid.'), 401);
+        } else {
+            Queue::push('DeleteFile', array('name' => $object->name));
+            $object->delete();
+
+            return Response::json(array('message' => 'Object deleted.'), 200);
+        }
     }
 
     private function storeFile($data, $name) {

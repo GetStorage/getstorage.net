@@ -30,7 +30,7 @@ My Objects
                 <td>{{ObjectHit::where('object_id', $object->id)->count()}}</td>
                 <td>{{$object->size}}</td>
                 <td>{{$object->created_at}}</td>
-                <td><a href="/panel/object/{{$object->name}}" class="btn btn-primary btn-mini">Analytics</a> <button class="btn btn-danger btn-mini">Delete</button></td>
+                <td>{{Form::open(array('url' => '/panel/object/'.$object->name, 'method' => 'delete'))}}<button class="btn btn-danger btn-mini delete" data-name="{{$object->nae}}">Delete</button>{{Form::close()}}</td>
             </tr>
             @endforeach
             </tbody>
