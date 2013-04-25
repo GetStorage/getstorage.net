@@ -31,8 +31,8 @@ Admin - Objects
                 <td>{{htmlentities($object->shortOriginal())}}</td>
                 <td>{{Sentry::getUserProvider()->findById($object->user_id)->username}}</td>
                 <td>{{ObjectHit::where('object_id', $object->id)->count()}}</td>
-                <td>{{$object->size}}</td>
-                <td>{{$object->size * ObjectHit::where('object_id', $object->id)->count()}}</td>
+                <td>{{$object->size()}}</td>
+                <td>{{$object->bandwidthUsage()}}</td>
                 <td>{{$object->created_at}}</td>
                 <td><a href="/admin/object/{{$object->name}}" class="btn btn-primary btn-mini">Analytics</a> <button class="btn btn-danger btn-mini">Delete</button></td>
             </tr>
