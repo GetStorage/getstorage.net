@@ -80,7 +80,13 @@ class UserKeysController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$key = Key::where('id', $id)->first();
+
+        if($key->user_id === Sentry::getUser()->id) {
+            $key->delete();
+        }
+
+        return Redirect::action('UserKeysController@index');
 	}
 
 }

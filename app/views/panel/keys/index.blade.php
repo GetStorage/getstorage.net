@@ -28,7 +28,7 @@ My Keys
             @foreach($keys as $key)
             <tr>
                 <td>{{$key->key}}</td>
-                <td>{{Form::open(array('action' => '/panel/keys/'.$key->id, 'method' => 'delete'))}}<button class="btn btn-danger btn-mini delete" data-key="{{$key->key}}">Delete</button>{{Form::close()}}</td>
+                <td>{{Form::open(array('url' => '/panel/keys/'.$key->id, 'method' => 'delete'))}}<button class="btn btn-danger btn-mini delete" data-key="{{$key->key}}">Delete</button>{{Form::close()}}</td>
             </tr>
             @endforeach
             </tbody>
