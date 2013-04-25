@@ -11,6 +11,9 @@
             <li class="{{Request::is('panel/keys') ? 'active' : ''}}"><a href="/panel/keys">Keys
                     <small>Your access keys</small>
                     <i class="icon-angle-right"></i></a></li>
+            <li class="{{Request::is('panel/billing') ? 'active' : ''}}"><a href="/panel/billing">Billing
+                    <small>Your billing area</small>
+                    <i class="icon-angle-right"></i></a></li>
             <li class="{{Request::is('panel/settings') ? 'active' : ''}}"><a href="/panel/settings">Settings
                     <small>Account settings</small>
                     <i class="icon-angle-right"></i></a></li>

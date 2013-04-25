@@ -38,6 +38,8 @@ Route::group(array('prefix' => 'panel', 'before' => 'auth'), function () {
     Route::resource('object', 'UserObjectController');
     Route::resource('keys', 'UserKeysController');
 
+    Route::controller('billing', 'UserBillingController');
+
     // Apps
     //Route::controller('dropbox', 'UserDropboxController');
 
