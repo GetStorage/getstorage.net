@@ -12,7 +12,7 @@ Apps
 
 <div class="row">
 
-    <div class="span4">
+    <!--<div class="span4">
         <h2>Store
             <small>Python</small>
         </h2>
@@ -32,19 +32,28 @@ Apps
         </ul>
 
         <a href="http://stor.ag/e/ac8a4e">Windows</a> - <a href="http://stor.ag/e/18b6b8">Any</a>
-    </div>
+    </div>-->
 
     <div class="span4">
-        <h2>Store.NET
-            <small>C#</small>
-        </h2>
+        <h3 class="title-divider"><span>Store.NET</span> <small>Windows. Written in C# by <a href="https://github.com/TheEndermen">TheEndermen</a></small></h3>
         <p>Simple "complete" app built for uploading files and taking screenshots with Storage.</p>
 
         <div class="center"><img src="http://stor.ag/e/2bc682" alt=""></div>
 
         <br class="clearfix">
 
-        <a href="http://bit.ly/storelatest">Windows</a> - <a href="https://github.com/TheEndermen/Store.NET/">Source</a>
+        <a href="http://bit.ly/storelatest">Download</a> - <a href="https://github.com/TheEndermen/Store.NET/">Source</a>
+    </div>
+
+    <div class="span4 offset4">
+        <h3 class="title-divider"><span>Coco Storage</span> <small>Mac. Written in Objective-C by <a href="https://github.com/Ivorforce">Ivorius</a></small></h3>
+        <p>Storage-implementation made with Cocoa. Create quick screenshots. Supports uploading instant screenshots, or any file you want.</p>
+
+        <div class="center"><img src="http://stor.ag/e/e63f9d" alt=""></div>
+
+        <br class="clearfix">
+
+        <a href="http://stor.ag/e/116a0e">Download</a>
     </div>
 
 </div>
