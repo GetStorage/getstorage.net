@@ -47,7 +47,7 @@ Route::filter('api', function() {
     $key = Key::where('key', Input::get('key'))->first();
 
     if($key === null) {
-        App::abort(401, 'Invalid Key');
+        return Response::json(array('message' => 'Invalid Key'), 401);
     }
 });
 

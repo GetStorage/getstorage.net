@@ -1,6 +1,8 @@
 <?php
 
-class ApiStatusController extends BaseController {
+namespace ApiVersionOne;
+
+class ApiStatusController extends \BaseController {
 
     /**
      * Returns the status of the api, currently only good for checking if the service is down.
