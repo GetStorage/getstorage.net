@@ -53,7 +53,7 @@ Apps
 
         <br class="clearfix">
 
-        <a href="http://stor.ag/e/116a0e">Download</a>
+        <a href="http://bit.ly/cocoStorage">Download</a>
     </div>
 
 </div>
