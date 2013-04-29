@@ -4,6 +4,11 @@
 class AccountController extends BaseController
 {
 
+    public function __construct()
+    {
+        $this->beforeFilter('guest', ['only' => ['getLogin', 'postLogin', 'getRegister', 'postRegister']]);
+    }
+
     public function getLogin()
     {
         return View::make('account.login');
