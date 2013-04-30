@@ -2,14 +2,14 @@
 
 Event::listen('user.register', 'UserHandler@onRegister');
 Event::listen('user.forgot', 'UserHandler@onForgot');
-Log::listen(function($level, $message, $context) {
+/*Log::listen(function($level, $message, $context) {
 
     // Save the php sapi and date, because the closure needs to be serialized
     $apiName = php_sapi_name();
     $date = new DateTime;
 
     Queue::push('LogHandler', array($level, $message, $context, $apiName, $date));
-});
+});*/
 
 /*
 |--------------------------------------------------------------------------
