@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+Log - Admin
+@stop
+
 @section('content')
 
 <div class="row">
@@ -11,14 +15,16 @@
                 <th>Level</th>
                 <th>Message</th>
                 <th>Context</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             @foreach($logs as $log)
             <tr>
                 <td>{{$log->level}}</td>
-                <td>{{$log->message}}</td>
+                <td>{{$log->shortMessage()}}</td>
                 <td>{{$log->context}}</td>
+                <td>{{Html::linkAction('AdminLogController@show', 'View', $log->id)}}</td>
             </tr>
             @endforeach
             </tbody>
