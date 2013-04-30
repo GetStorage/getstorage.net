@@ -2,6 +2,14 @@
 
 Event::listen('user.register', 'UserHandler@onRegister');
 Event::listen('user.forgot', 'UserHandler@onForgot');
+Log::listen(function($level, $message, $context) {
+
+    // Save the php sapi and date, because the closure needs to be serialized
+    $apiName = php_sapi_name();
+    $date = new DateTime;
+
+    Queue::push('LogHandler', array($level, $message, $context, $apiName, $date));
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +43,9 @@ ClassLoader::addDirectories(array(
 |
 */
 
-$logFile = 'log-'.php_sapi_name().'.txt';
+//$logFile = 'log-'.php_sapi_name().'.txt';
 
-Log::useDailyFiles(storage_path().'/logs/'.$logFile);
+//Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
 /*
 |--------------------------------------------------------------------------

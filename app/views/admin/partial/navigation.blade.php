@@ -5,6 +5,9 @@
             <li class="{{Request::is('admin/home') ? 'active' : ''}}">
                 {{Html::linkAction('AdminHomeController@getIndex', 'Home', null, array('class' => 'first'))}}
             </li>
+            <li class="{{Request::is('admin/log') ? 'active' : ''}}">
+                {{Html::linkAction('AdminLogController@index', 'Logs')}}
+            </li>
             <li class="{{Request::is('admin/object') ? 'active' : ''}}">
                 {{Html::linkAction('AdminObjectController@index', 'Objects')}}
             </li>
