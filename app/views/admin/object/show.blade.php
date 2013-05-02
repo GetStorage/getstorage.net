@@ -11,6 +11,8 @@ Admin - Object
     <div class="span9">
         <h2>{{$object->name}}</h2>
 
+        <pre><?php var_dump($object); ?></pre>
+
         <table class="table">
             <thead>
             <tr>
