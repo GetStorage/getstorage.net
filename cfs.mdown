@@ -40,7 +40,7 @@ This will return all public information we have on the requested file.
 #### Upload a File
 This one is more complex, but only because we want to support tons of methods for uploading files. This method currently only supports multipart, as it provides us with all info we need to process your request. The following are required in the multipart request: file, filename and mime. 
 
-    POST api.stor.ag./v2/cfs
+    POST api.stor.ag/v2/cfs
     
 Optional Params:
 
