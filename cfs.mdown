@@ -1,0 +1,49 @@
+CFS
+======
+From Storage
+
+
+### What is CFS?
+CFS is quite simply, Cloud File Storage. A new way to work with the files you use and work with on Storage. Instead of just working with a random, non descriptive URL.
+
+Our goals for CFS are to be a (almost) complete filesystem, for the web. The CFSAPI will completely (in time) replace the standard Storage API.
+
+
+
+API Documentation
+=================
+Our API is very RESTful, meaning everything is accessed via HEAD, GET, POST, DELETE, etc. We also use a simple key based authing system for the api, to track requests and verify privs.
+
+#### Sending Authentication Information
+You'll first need to get a key from http://getstorage.net/, after that you'll be able to use your key either via a query paramater or via a request header. Examples are shown below:
+
+Query String: `GET api.stor.ag/v2/status?key=yourkey` 
+Request Header: `CFS-Key: yourkey`
+<br>
+### Working With Files
+#### Getting a List
+This will get a list of files/folders in the users CFS. 
+`GET api.stor.ag/v2/cfs`
+Optional Params:
+* recursive (boolean) defaults to true 
+<br>
+#### Get Info About a File
+This will return all public information we have on the requested file. 
+`HEAD api.stor.ag/v2/cfs/yourFolder/yourFile.txt`
+<br>
+#### Upload a File
+This one is more complex, but only because we want to support tons of methods for uploading files. This method currently only supports multipart, as it provides us with all info we need to process your request. The following are required in the multipart request: file, filename and mime. 
+`POST api.stor.ag./v2/cfs`
+Optional Params:
+
+* folder (string) - This will basically provide a path for the file, if the folder doesn't exist, we'll make it. 
+* mime (string) - You can specify a different mime type for serving the file.
+* secure (boolean) - Optionally force this file to be served via https
+* private (boolean) - More support will be added for this in the future, for now you can assume it'll control file visibility
+<br>
+#### Update a File
+This allows you to send a new version of the file or change the settings, in the future we'll support automatic patching via PATCH. Same params/requirements as Uploading a File. File is optional if you're just updating settings.
+`PUT api.stor.ag/v2/cfs/yourFolder/yourFile.txt` 
+<br>
+#### Delete a File
+`DELETE api.stor.ag/v2/cfs/yourFolder/yourFile.txt`
