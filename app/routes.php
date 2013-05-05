@@ -19,16 +19,19 @@ Route::controller('/account', 'AccountController');
 Route::get('/e/{id}', 'ObjectController@getObject');
 
 Route::group(array('prefix' => 'api/v1', 'before' => 'api'), function () {
-    Route::resource('thing', 'ApiObjectController'); // @todo remove
-    Route::resource('object', 'ApiObjectController');
-    Route::controller('status', 'ApiStatusController');
-
+    Route::resource('thing', 'ApiVersionOne\ApiObjectController'); // @todo remove
+    Route::resource('object', 'ApiVersionOne\ApiObjectController');
+    Route::controller('status', 'ApiVersionOne\ApiStatusController');
 });
+
 Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v1', 'before' => 'api'), function () {
-    Route::resource('object', 'ApiObjectController');
-    Route::controller('status', 'ApiStatusController');
+    Route::resource('object', 'ApiVersionOne\ApiObjectController');
+    Route::controller('status', 'ApiVersionOne\ApiStatusController');
 });
-
+Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v2', 'before' => 'api'), function () {
+    Route::controller('status', 'ApiVersionTwo\ApiStatusController');
+    Route::resource('cfs', 'ApiVersionTwo\ApiCfsController');
+});
 
 Route::group(array('prefix' => 'panel', 'before' => 'auth'), function () {
     Route::get('/', function () {

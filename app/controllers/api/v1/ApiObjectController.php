@@ -1,6 +1,8 @@
 <?php
 
-class ApiObjectController extends BaseController {
+namespace ApiVersionOne;
+
+class ApiObjectController extends \BaseController {
 
     public function __construct() {
         $this->beforeFilter('api');
