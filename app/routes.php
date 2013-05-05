@@ -24,8 +24,8 @@ Route::group(array('prefix' => 'api/v1', 'before' => 'api'), function () {
     Route::controller('status', 'ApiVersionOne\ApiStatusController');
 });
 Route::group(array('prefix' => 'api/v2', 'before' => 'api'), function () {
-    Route::resource('object', 'ApiVersionTwo\ApiObjectController');
     Route::controller('status', 'ApiVersionTwo\ApiStatusController');
+    Route::resource('cfs', 'ApiVersionTwo\ApiCfsController');
 });
 
 Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v1', 'before' => 'api'), function () {

@@ -44,7 +44,8 @@ Route::filter('auth.basic', function()
 });
 
 Route::filter('api', function() {
-    $key = Key::where('key', Input::get('key'))->first();
+    $requestedKey = (Request::header('Storage-Key') != false ? Request::header('Storage-Key') : Input::get('key') );
+    $key = Key::where('key', $requestedKey)->first();
 
     if($key === null) {
         return Response::json(array('message' => 'Invalid Key'), 401);
