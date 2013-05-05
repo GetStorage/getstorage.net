@@ -33,6 +33,9 @@ Register
     <label class="checkbox">
         <input type="checkbox" value="term">
         I agree with the {{Html::linkAction('DocsController@getTerms', 'Terms and Conditions', null, array('target' => '_blank'))}}. </label>
+    <label class="checkbox">
+        <input type="checkbox" name="newsletter" value="1" checked>
+        I wish to receive newsletter updates</label>
     <button class="btn btn-primary" type="submit">Sign up</button>
 {{ Form::close() }}
 @stop

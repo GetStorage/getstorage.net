@@ -76,7 +76,8 @@ class AccountController extends BaseController
             'username'         => 'required|min:2|max:32|unique:users',
             'email'            => 'required|email|unique:users',
             'password'         => 'required|min:6',
-            'password_confirm' => 'required|same:password'
+            'password_confirm' => 'required|same:password',
+            'newsletter'       => 'required'
         );
 
         $validator = Validator::make($input, $rules);
@@ -88,9 +89,10 @@ class AccountController extends BaseController
         try {
             $user = Sentry::register(
                 array(
-                     'username' => mb_strtolower($input['username']),
-                     'email'    => $input['email'],
-                     'password' => $input['password']
+                     'username'   => mb_strtolower($input['username']),
+                     'email'      => $input['email'],
+                     'password'   => $input['password'],
+                     'newsletter' => ($input['newsletter'] == 1)
                 )
             );
             $activationCode = $user->getActivationCode();
