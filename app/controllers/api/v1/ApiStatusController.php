@@ -11,7 +11,7 @@ class ApiStatusController extends \BaseController {
      */
     public function getIndex() {
 
-        return Response::json(array('status' => 'ok', 'timestamp' => time()), 200);
+        return \Response::json(array('status' => 'ok', 'timestamp' => time()), 200);
     }
 
 }

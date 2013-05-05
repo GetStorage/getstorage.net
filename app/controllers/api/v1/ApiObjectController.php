@@ -27,20 +27,20 @@ class ApiObjectController extends \BaseController {
         $original = $extension = null;
 
         // if not Input::file it might be file_get_contents('php://input')
-        if(Input::hasFile('file')) {
-            $file = file_get_contents(Input::file('file')->getRealPath());
-            $mime = Input::file('file')->getMimeType();
+        if(\Input::hasFile('file')) {
+            $file = file_get_contents(\Input::file('file')->getRealPath());
+            $mime = \Input::file('file')->getMimeType();
 
-            $original = Input::file('file')->getClientOriginalName();
-            $extension = Input::file('file')->getClientOriginalExtension();
+            $original = \Input::file('file')->getClientOriginalName();
+            $extension = \Input::file('file')->getClientOriginalExtension();
         } else {
             $postBody = true;
 
             // Must be a post body or error
             $file = file_get_contents('php://input');
-            $mime = (Request::header('Content-Type') ? Request::header('Content-Type') : 'application/octet-stream');
+            $mime = (\Request::header('Content-Type') ? \Request::header('Content-Type') : 'application/octet-stream');
 
-            if(Input::get('filename')) {
+            if(\Input::get('filename')) {
                 $filename = Input::get('filename');
 
                 $original = $filename;
@@ -48,31 +48,31 @@ class ApiObjectController extends \BaseController {
             }
 
             if(!$file) {
-                App::abort(400, 'Didn\'t send a proper file.');
+                \App::abort(400, 'Didn\'t send a proper file.');
             }
         }
 
         $newName = self::generateName();
         $filePath = self::storeFile($file, $newName);
 
-        $apikey = Input::get('key');
-        $return = Input::get('return', 'json');
+        $apikey = \Input::get('key');
+        $return = \Input::get('return', 'json');
 
-        $validator = Validator::make(array('key' => $apikey), array('key' => 'required'));
+        $validator = \Validator::make(array('key' => $apikey), array('key' => 'required'));
 
         if($validator->fails()) {
-            App::abort(401);
+            \App::abort(401);
         }
 
         // @todo validation
 
         // Get the data we'll need
-        $user = Sentry::getUserProvider()->findById(Key::where('key', $apikey)->first()->user_id);
-        $file = new SplFileInfo($filePath);
+        $user = \Sentry::getUserProvider()->findById(\Key::where('key', $apikey)->first()->user_id);
+        $file = new \SplFileInfo($filePath);
         $path = $file;
         $fileInfo = $file->getFileInfo();
 
-        $object = new Object();
+        $object = new \Object();
 
         $object->name = $newName;
         $object->user_id = $user->id;
@@ -87,12 +87,12 @@ class ApiObjectController extends \BaseController {
         $object->save();
 
         // @todo do this better
-        if(App::environment() != 'local') {
-            Queue::push('UploadFile', array('name' => $newName));
+        if(\App::environment() != 'local') {
+            \Queue::push('UploadFile', array('name' => $newName));
         }
 
         if($return === 'json') {
-            return Response::json(array('id' => $newName));
+            return \Response::json(array('id' => $newName));
         } elseif($return === 'text') {
             echo 'http://stor.ag/e/' . $newName;
         }
@@ -105,15 +105,15 @@ class ApiObjectController extends \BaseController {
      * @return Response
      */
     public function show($id) {
-        $key = Input::get('key');
+        $key = \Input::get('key');
 
-        $user = Sentry::getUserProvider()->findById(Key::where('key', $key)->first()->user_id);
-        $object = Object::where('name', $id)->first();
+        $user = \Sentry::getUserProvider()->findById(\Key::where('key', $key)->first()->user_id);
+        $object = \Object::where('name', $id)->first();
 
         if($user->id === $object->user_id) {
-            return Response::json($object);
+            return \Response::json($object);
         } else {
-            return Response::json(array('error' => 'You don\'t own this!'), 401);
+            return \Response::json(array('error' => 'You don\'t own this!'), 401);
         }
 
     }
@@ -145,18 +145,18 @@ class ApiObjectController extends \BaseController {
      * @return Response
      */
     public function destroy($id) {
-        $key = Input::get('key');
+        $key = \Input::get('key');
 
-        $user = Sentry::getUserProvider()->findById(Key::where('key', $key)->first()->user_id);
-        $object = Object::where('name', $id)->first();
+        $user = \Sentry::getUserProvider()->findById(\Key::where('key', $key)->first()->user_id);
+        $object = \Object::where('name', $id)->first();
 
         if($object->user_id != $user->id) {
-            return Response::json(array('message' => 'Key invalid.'), 401);
+            return \Response::json(array('message' => 'Key invalid.'), 401);
         } else {
-            Queue::push('DeleteFile', array('name' => $object->name));
+            \Queue::push('DeleteFile', array('name' => $object->name));
             $object->delete();
 
-            return Response::json(array('message' => 'Object deleted.'), 200);
+            return \Response::json(array('message' => 'Object deleted.'), 200);
         }
     }
 
@@ -174,7 +174,7 @@ class ApiObjectController extends \BaseController {
         $num = mt_rand(0, 0xffffff);
         $output = sprintf("%06x", $num);
 
-        if(Object::where('name', $output)->count() != 0
+        if(\Object::where('name', $output)->count() != 0
         ) {
             return self::generateName();
         } else {
@@ -185,11 +185,11 @@ class ApiObjectController extends \BaseController {
     /**
      * Returns an array of file info
      *
-     * @param SplFileInfo $file
+     * @param \SplFileInfo $file
      *
      * @return array
      */
-    private function fileInfo(SplFileInfo $file) {
+    private function fileInfo(\SplFileInfo $file) {
         return array('extension' => $file->getExtension(), 'filename' => $file->getFilename(), 'size' => $file->getSize(), 'type' => $file->getType());
     }
 
