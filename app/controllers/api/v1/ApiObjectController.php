@@ -11,7 +11,7 @@ class ApiObjectController extends \BaseController {
     /**
      * Get all objects from the user
      *
-     * @return Response
+     * @return \Response
      */
     public function index() {
         //
@@ -20,7 +20,7 @@ class ApiObjectController extends \BaseController {
     /**
      * Store an object
      *
-     * @return Response
+     * @return \Response
      */
     public function store() {
         $postBody = true;
@@ -102,7 +102,7 @@ class ApiObjectController extends \BaseController {
      * Gets the info about the file IF key owns it
      *
      * @param  int $id
-     * @return Response
+     * @return \Response
      */
     public function show($id) {
         $key = \Input::get('key');
@@ -122,7 +122,7 @@ class ApiObjectController extends \BaseController {
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return Response
+     * @return \Response
      */
     public function edit($id) {
         //
@@ -132,7 +132,7 @@ class ApiObjectController extends \BaseController {
      * Update the specified resource in storage.
      *
      * @param  int $id
-     * @return Response
+     * @return \Response
      */
     public function update($id) {
         //
@@ -142,7 +142,7 @@ class ApiObjectController extends \BaseController {
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return Response
+     * @return \Response
      */
     public function destroy($id) {
         $key = \Input::get('key');
