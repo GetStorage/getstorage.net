@@ -12,7 +12,6 @@ class ApiCfsController extends \BaseController {
         $requestedKey = (\Request::header('Storage-Key') != false ? \Request::header('Storage-Key') : \Input::get('key') );
         $key = \Key::where('key', $requestedKey)->first();
         $this->user = \User::find($key->user_id);
-
     }
 
     /**
@@ -21,7 +20,13 @@ class ApiCfsController extends \BaseController {
      * @return Response
      */
     public function index() {
-        $fs = \CFS::where('user_id', $this->user->id)->get();
+        $fs = \CFS::where('user_id', $this->user->id)->get()->toArray();
+
+        for($i = 0; count($fs) > $i; $i++) {
+            $key = str_replace($this->user->username.'/', '', $fs[$i]['key']);
+            $fs[$i]['url'] = 'http://'.$this->user->username.'.stor.ag/'.$key;
+        }
+
 
         return \Response::json($fs);
     }
