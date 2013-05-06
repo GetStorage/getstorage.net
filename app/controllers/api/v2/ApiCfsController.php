@@ -103,7 +103,13 @@ class ApiCfsController extends \BaseController {
         \Queue::push('CFSUploadFile', array('key' => $cfs->key, 'path' => $file->getRealPath()));
 
 		// Send object out
-		return \Response::json($cfs, 200);
+        if($this->getParam('return', 'json') == 'url') {
+            $key = str_replace($this->user->username.'/', '', $cfs->key);
+            return 'http://'.$this->user->username.'.stor.ag/'.$key;
+        } else {
+            return \Response::json($cfs, 200);
+        }
+
     }
 
     /**
