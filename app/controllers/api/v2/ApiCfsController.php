@@ -9,7 +9,7 @@ class ApiCfsController extends \BaseController {
     private $user;
 
     public function __construct() {
-        $requestedKey = (\Request::header('Storage-Key') != false ? \Request::header('Storage-Key') : \Input::get('key') );
+        $requestedKey = (\Request::header('Storage-Key') != false ? \Request::header('Storage-Key') : \Input::get('key'));
         $key = \Key::where('key', $requestedKey)->first();
         $this->user = \User::find($key->user_id);
     }
@@ -23,8 +23,8 @@ class ApiCfsController extends \BaseController {
         $fs = \CFS::where('user_id', $this->user->id)->get()->toArray();
 
         for($i = 0; count($fs) > $i; $i++) {
-            $key = str_replace($this->user->username.'/', '', $fs[$i]['key']);
-            $fs[$i]['url'] = 'http://'.$this->user->username.'.stor.ag/'.$key;
+            $key = str_replace($this->user->username . '/', '', $fs[$i]['key']);
+            $fs[$i]['url'] = 'http://' . $this->user->username . '.stor.ag/' . $key;
         }
 
 
@@ -40,51 +40,44 @@ class ApiCfsController extends \BaseController {
 
         // We should move these somewhere else
         // @todo add message
-        \Validator::extend('folder', function($attribute, $value, $parameters) {
-            if(strpbrk($value, "?%*:|\"<>\\") === FALSE) {
+        \Validator::extend('folder', function ($attribute, $value, $parameters) {
+            if(strpbrk($value, "?%*:|\"<>\\") === false) {
                 return true;
             } else {
                 return false;
             }
         });
-    
-    	// Should we handle everything here or write individual handlers?
-    
-		// get params
+
+        // Should we handle everything here or write individual handlers?
+
+        // get params
 
         $finfo = array();
-		$finfo['file'] = $this->getParam('file', \Input::file('file'));
+        $finfo['file'] = $this->getParam('file', \Input::file('file'));
         $finfo['filename'] = $this->getParam('filename', \Input::file('file')->getClientOriginalName());
         $finfo['folder'] = $this->getParam('folder', null);
         $finfo['mime'] = $this->getParam('mime', \Input::file('file')->getMimeType());
         $finfo['secure'] = $this->getParam('secure', false);
         $finfo['visibility'] = $this->getParam('visibility', 'public');
 
-		// validate
-		$rules = array(
-            'key' => 'unique:cfs,key',
-            'file' => 'required',
-			'filename' => 'required|min:1|max:255',
-			'folder' => 'folder|min:1|max:255',
-			'mime' => 'required',
-			'secure' => 'required',
-            'visibility' => 'required'
-		);
+        // validate
+        $rules = array('key' => 'unique:cfs,key', 'file' => 'required', 'filename' => 'required|min:1|max:255', 'folder' => 'folder|min:1|max:255', 'mime' => 'required', 'secure' => 'required', 'visibility' => 'required');
 
         $folder = \CFS::cleanFolder($finfo['folder']);
 
         $finfo['key'] = $this->user->username . '/e/' . $folder . '/' . $finfo['filename'];
-		
-		$validator = \Validator::make($finfo, $rules);
+
+        $validator = \Validator::make($finfo, $rules);
 
         if($validator->fails()) {
             return \Response::json(array('status' => 'failure', 'messages' => $validator->messages()->toArray()), 409);
         }
 
-        $file = \Input::file('file')->move(base_path() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR, $finfo['file']);
+        $file = \Input::file('file')
+            ->move(base_path() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR, $finfo['file']);
 
-		// save to db
-		$cfs = new \CFS();
+        // save to db
+        $cfs = new \CFS();
 
         $cfs->key = $finfo['key'];
         $cfs->name = $finfo['filename'];
@@ -96,16 +89,17 @@ class ApiCfsController extends \BaseController {
         $cfs->size = \Input::file('file')->getClientSize();
         $cfs->user_id = $this->user->id;
 
-		$saved = $cfs->save();
+        $saved = $cfs->save();
 
 
-		// queue
+        // queue
         \Queue::push('CFSUploadFile', array('key' => $cfs->key, 'path' => $file->getRealPath()));
 
-		// Send object out
+        // Send object out
         if($this->getParam('return', 'json') == 'url') {
-            $key = str_replace($this->user->username.'/', '', $cfs->key);
-            return 'http://'.$this->user->username.'.stor.ag/'.$key;
+            $key = str_replace($this->user->username . '/', '', $cfs->key);
+
+            return 'http://' . $this->user->username . '.stor.ag/' . $key;
         } else {
             return \Response::json($cfs, 200);
         }
@@ -163,16 +157,16 @@ class ApiCfsController extends \BaseController {
      * @return string
      */
     private function getParam($name, $default = false) {
-    	// Check Request::header, Input::get and other stuff in the future
-		$header = \Request::header('CFS-' . $name);
-		$input = \Input::get($name);
+        // Check Request::header, Input::get and other stuff in the future
+        $header = \Request::header('CFS-' . $name);
+        $input = \Input::get($name);
 
         if(!$header && !$input) {
             return $default;
         }
-		
-		if($header) return $header;
-		if($input) return $input;	
+
+        if($header) return $header;
+        if($input) return $input;
     }
 
 }
