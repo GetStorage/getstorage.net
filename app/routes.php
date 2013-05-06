@@ -19,16 +19,22 @@ Route::controller('/account', 'AccountController');
 Route::get('/e/{id}', 'ObjectController@getObject');
 
 Route::group(array('prefix' => 'api/v1', 'before' => 'api'), function () {
+    header('Access-Control-Allow-Origin: *');
+
     Route::resource('thing', 'ApiVersionOne\ApiObjectController'); // @todo remove
     Route::resource('object', 'ApiVersionOne\ApiObjectController');
     Route::controller('status', 'ApiVersionOne\ApiStatusController');
 });
 
 Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v1', 'before' => 'api'), function () {
+    header('Access-Control-Allow-Origin: *');
+
     Route::resource('object', 'ApiVersionOne\ApiObjectController');
     Route::controller('status', 'ApiVersionOne\ApiStatusController');
 });
 Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v2', 'before' => 'api'), function () {
+    header('Access-Control-Allow-Origin: *');
+
     Route::controller('status', 'ApiVersionTwo\ApiStatusController');
     Route::resource('cfs', 'ApiVersionTwo\ApiCfsController');
 });
