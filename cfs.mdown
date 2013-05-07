@@ -48,6 +48,7 @@ Optional Params:
 * mime (string) - You can specify a different mime type for serving the file.
 * secure (boolean) - Optionally force this file to be served via https
 * private (boolean) - More support will be added for this in the future, for now you can assume it'll control file visibility
+
 Your can also send these paramaters via a HTTP Request Header, by prefixing the name with CFS- (for example CFS-folder, CFS-mime)
 
 <br>
