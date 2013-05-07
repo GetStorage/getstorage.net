@@ -37,6 +37,7 @@ Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v2', 'before' => 'api
 
     Route::controller('status', 'ApiVersionTwo\ApiStatusController');
     Route::resource('cfs', 'ApiVersionTwo\ApiCfsController');
+    Route::resource('key', 'ApiVersionTwo\ApiKeyController');
 });
 
 Route::group(array('prefix' => 'panel', 'before' => 'auth'), function () {
