@@ -4,7 +4,7 @@
 namespace ApiVersionTwo;
 
 
-class ApiCfsController extends BaseController {
+class ApiCfsController extends ApiBaseController {
 
     /**
      * Get all objects from the user
