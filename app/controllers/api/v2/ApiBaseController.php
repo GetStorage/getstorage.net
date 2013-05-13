@@ -6,7 +6,7 @@ namespace ApiVersionTwo;
 
 class ApiBaseController extends \BaseController {
 
-    private $user;
+    public $user;
 
     public function __construct() {
         $requestedKey = (\Request::header('Storage-Key') != false ? \Request::header('Storage-Key') : \Input::get('key'));
