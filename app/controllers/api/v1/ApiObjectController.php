@@ -41,7 +41,7 @@ class ApiObjectController extends \BaseController {
             $mime = (\Request::header('Content-Type') ? \Request::header('Content-Type') : 'application/octet-stream');
 
             if(\Input::get('filename')) {
-                $filename = Input::get('filename');
+                $filename = \Input::get('filename');
 
                 $original = $filename;
                 $extension = (explode('.', $filename)[1] ? explode('.', $filename)[1] : null);
