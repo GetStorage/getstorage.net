@@ -53,7 +53,7 @@ Apps
 
         <br class="clearfix">
 
-        <a href="http://bit.ly/cocoStorage">Download</a>
+        <a href="http://tiny.cc/cocoStorage">Download</a>
     </div>
 
 </div>
