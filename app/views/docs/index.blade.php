@@ -8,8 +8,11 @@
         <div class="jumbotron">
             <h1>Save, Store, Share</h1>
 
-            <p class="lead">Storage is a mixture of file hosting, and a filesystem for the web. Upload your files to us
-                and they'll instantly be made publicly available. Ad-free and totally awesome.</p>
+            <p class="lead">
+                Storage is an online file system for your stuff. <br><br>
+                <a href="http://clone1018.stor.ag/e/Pictures/koala.jpg" target="_blank">clone1018.stor.ag/e/Pictures/koala.jpg</a><br><br>
+                Instantly upload and share what you want to make public, without large fees or worries.
+            </p>
             <a class="btn btn-large btn-info" href="/account/register">Sign up for Beta</a>
         </div>
     </div>

@@ -44,7 +44,7 @@
           type='text/css'>
 </head>
 
-<body class="page page-index-static">
+<body class="page page-index-static" @yield('headclass') >
 <div id="navigation" class="wrapper">
     <div class="navbar navbar-static-top">
 
