@@ -62,11 +62,10 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+    // Let's try clearing session data to help resolve the error.
+    Session::clear();
 
-    if (strpos($exception->getMessage(), 'unserialize') !== false) {
-        Session::clear();
-    }
+	Log::error($exception);
 });
 
 /*
