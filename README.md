@@ -1,4 +1,4 @@
-## Storage v1.1.2
+## Storage v1.1.3
 
 This is the code behind getstorage.net
 
