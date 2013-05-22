@@ -5,7 +5,8 @@
         "cartalyst/sentry": "2.0.*",
         "aws/aws-sdk-php-laravel": "1.*",
         "benthedesigner/dropbox": "*",
-        "braintree/braintree_php": "2.19.0"
+        "braintree/braintree_php": "2.19.0",
+        "jasonlewis/basset": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

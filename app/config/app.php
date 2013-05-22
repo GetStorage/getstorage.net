@@ -117,6 +117,7 @@ return array(
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Cartalyst\Sentry\SentryServiceProvider',
         'Aws\Laravel\AwsServiceProvider',
+        'Basset\BassetServiceProvider',
 
 	),
 
@@ -184,6 +185,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
         'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        'Basset' => 'Basset\Facade',
 
 	),
 
