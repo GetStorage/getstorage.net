@@ -62,11 +62,23 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
 App::error(function(Exception $exception, $code)
 {
-    // Let's try clearing session data to help resolve the error.
-    Session::flush();
-    Session::regenerate();
-
 	Log::error($exception);
+
+    // If our key or session method changes.
+    if(strpos($exception->getMessage(), 'unserialize') !== false) {
+        if(isset($_SERVER['HTTP_COOKIE'])) {
+            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+            foreach($cookies as $cookie) {
+                $parts = explode('=', $cookie);
+                $name = trim($parts[0]);
+                setcookie($name, '', time() - 1000);
+                setcookie($name, '', time() - 1000, '/');
+            }
+        }
+
+        return Redirect::action('AccountController@getLogin');
+    }
+
 });
 
 /*
