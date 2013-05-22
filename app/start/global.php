@@ -63,7 +63,8 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 App::error(function(Exception $exception, $code)
 {
     // Let's try clearing session data to help resolve the error.
-    Session::clear();
+    Session::flush();
+    Session::regenerate();
 
 	Log::error($exception);
 });
