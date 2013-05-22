@@ -23,7 +23,7 @@ Register
 {{ Form::open(array('url' => 'account/register', 'class' => 'form-login form-wrapper form-medium')) }}
     <h3 class="title-divider">
         <span>Sign Up</span>
-        <small>Already signed up? {{Html::linkAction('AccountController@getLogin', 'Login here')}}.</small>
+        <small>Already signed up? {{HTML::linkAction('AccountController@getLogin', 'Login here')}}.</small>
     </h3>
     <h5>Account Information</h5>
     <input type="text" class="input-block-level placeholder" name="username" placeholder="Username">
@@ -32,7 +32,7 @@ Register
     <input type="password" class="input-block-level placeholder" name="password_confirm" placeholder="Repeat Password"/>
     <label class="checkbox">
         <input type="checkbox" value="term">
-        I agree with the {{Html::linkAction('DocsController@getTerms', 'Terms and Conditions', null, array('target' => '_blank'))}}. </label>
+        I agree with the {{HTML::linkAction('DocsController@getTerms', 'Terms and Conditions', null, array('target' => '_blank'))}}. </label>
     <label class="checkbox">
         <input type="checkbox" name="newsletter" value="1" checked>
         I wish to receive newsletter updates</label>
