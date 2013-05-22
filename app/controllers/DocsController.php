@@ -39,10 +39,10 @@ class DocsController extends BaseController {
         return View::make('docs.legal');
     }
 
-    public function getApi() {
-        $endpoint = 'api.stor.ag/v1';
+    public function getApi($version) {
+        if(strlen($version) != 2) App::abort(404);
 
-        return View::make('docs.api', array('endpoint' => $endpoint));
+        return View::make('docs.api.'.$version);
     }
 
 }

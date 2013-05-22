@@ -24,7 +24,7 @@ Log - Admin
                 <td>{{$log->level}}</td>
                 <td>{{$log->shortMessage()}}</td>
                 <td>{{$log->context}}</td>
-                <td>{{Html::linkAction('AdminLogController@show', 'View', $log->id)}}</td>
+                <td>{{HTML::linkAction('AdminLogController@show', 'View', $log->id)}}</td>
             </tr>
             @endforeach
             </tbody>

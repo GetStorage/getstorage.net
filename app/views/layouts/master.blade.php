@@ -44,7 +44,7 @@
           type='text/css'>
 </head>
 
-<body class="page page-index-static" @yield('headclass') >
+<body class="page page-index-static">
 <div id="navigation" class="wrapper">
     <div class="navbar navbar-static-top">
 
@@ -81,15 +81,15 @@
                 <!--user menu-->
                 <ul class="nav user-menu pull-right">
                     @if(!Sentry::check())
-                    <li>{{Html::linkAction('AccountController@getRegister', 'Sign Up', null, array('class' => 'btn btn-primary signup'))}}</li>
-                    <li>{{Html::linkAction('AccountController@getLogin', 'Login', null, array('class' => 'btn btn-primary login'))}}</li>
+                    <li>{{HTML::linkAction('AccountController@getRegister', 'Sign Up', null, array('class' => 'btn btn-primary signup'))}}</li>
+                    <li>{{HTML::linkAction('AccountController@getLogin', 'Login', null, array('class' => 'btn btn-primary login'))}}</li>
                     @else
                     @if(Sentry::getUser()->inGroup(Sentry::getGroupProvider()->findByName('Admins')))
-                    <li>{{Html::linkAction('AdminHomeController@getIndex', 'Admin', null, array('class' => 'btn btn-danger'))}}</li>
+                    <li>{{HTML::linkAction('AdminHomeController@getIndex', 'Admin', null, array('class' => 'btn btn-danger'))}}</li>
                     <li class="divider-vertical"></li>
                     @endif
-                    <li>{{Html::linkAction('UserHomeController@getIndex', 'Panel', null, array('class' => 'btn btn-primary signup'))}}</li>
-                    <li>{{Html::linkAction('AccountController@getLogout', 'Logout', null, array('class' => 'btn btn-primary login'))}}</li>
+                    <li>{{HTML::linkAction('UserHomeController@getIndex', 'Panel', null, array('class' => 'btn btn-primary signup'))}}</li>
+                    <li>{{HTML::linkAction('AccountController@getLogout', 'Logout', null, array('class' => 'btn btn-primary login'))}}</li>
                     @endif
                 </ul>
 
@@ -99,8 +99,8 @@
                     <!--main navigation-->
                     <ul class="nav" id="main-menu">
                         <li class="home-link"><a href="{{URL::to('/')}}"><i class="icon-home hidden-phone"></i><span class="visible-phone">Home</span></a></li>
-                        <li>{{Html::linkAction('DocsController@getApps', 'Apps', null, array('class' => 'menu-item'))}}</li>
-                        <li>{{Html::linkAction('DocsController@getApi', 'Api', null, array('class' => 'menu-item'))}}</li>
+                        <li>{{HTML::linkAction('DocsController@getApps', 'Apps', null, array('class' => 'menu-item'))}}</li>
+                        <li>{{HTML::linkAction('DocsController@getApi', 'Api', 'v2', array('class' => 'menu-item'))}}</li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -161,9 +161,9 @@
                 </div>
                 <div class="span6">
                     <ul class="inline pull-right">
-                        <li>{{Html::linkAction('DocsController@getTerms', 'Terms')}}</li>
-                        <li>{{Html::linkAction('DocsController@getPrivacy', 'Privacy')}}</li>
-                        <li>{{Html::linkAction('DocsController@getLegal', 'Legal')}}</li>
+                        <li>{{HTML::linkAction('DocsController@getTerms', 'Terms')}}</li>
+                        <li>{{HTML::linkAction('DocsController@getPrivacy', 'Privacy')}}</li>
+                        <li>{{HTML::linkAction('DocsController@getLegal', 'Legal')}}</li>
                     </ul>
                 </div>
             </div>
