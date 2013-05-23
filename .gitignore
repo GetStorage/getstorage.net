@@ -8,3 +8,4 @@ composer.lock
 /app/config/production
 _ide_helper.php
 /storage/*
+/public/builds/*
