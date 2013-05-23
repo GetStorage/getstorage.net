@@ -118,6 +118,7 @@ return array(
         'Cartalyst\Sentry\SentryServiceProvider',
         'Aws\Laravel\AwsServiceProvider',
         'Basset\BassetServiceProvider',
+        'Greggilbert\Recaptcha\RecaptchaServiceProvider',
 
 	),
 
