@@ -74,14 +74,14 @@ if [ $1 ]; then
             # Bump the version.
             # =================
             sed -i 's/v[0-9\.]\+/v$1/' README.md
-            git commit readme.md -m "Bumped version to $1"
+            git commit README.md -m "Bumped version to $1"
 
             # Finish the release
             # ==================
             git checkout master
             git merge --no-ff release-$1
 
-            git tag -a $1
+            git tag -m "Stable $1" -a $1
 
             # Mirror to develop
             # =================
