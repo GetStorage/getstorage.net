@@ -56,6 +56,7 @@ return array(
                 $collection->javascript('jquery.quicksand.js');
                 $collection->javascript('jquery.flexslider-min.js');
                 $collection->javascript('script.js');
+                $collection->javascript('application.js');
             });
 
             $directory->apply('JsMin');
