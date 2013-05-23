@@ -73,7 +73,7 @@ if [ $1 ]; then
 
             # Bump the version.
             # =================
-            sed -i 's/v[0-9\.]\+/v$1/' README.md
+            sed -i "s/v[0-9\.]\+/v$1/" README.md
             git commit README.md -m "Bumped version to $1"
 
             # Finish the release

@@ -5,7 +5,14 @@ Terms
 @stop
 
 @section('content')
+<div class="row">
+    @include('docs.partial.navigation')
 
-<p>Our terms of service are currently in progress, sit tight while we work on them.</p>
+    <!--main content-->
+    <div class="span9">
+        <h2>Terms of Service</h2>
+        <p>Coming Soon</p>
 
+    </div>
+</div>
 @stop
