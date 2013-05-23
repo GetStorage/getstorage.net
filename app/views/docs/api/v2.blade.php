@@ -162,7 +162,7 @@
             <h4 id="folder-update">Update a Folder</h4>
 
             <p>Change a folders name or location.</p>
-            <pre>PATCH api.stor.ag/v2/cfs/yourFolder</pre>
+            <pre>PUT api.stor.ag/v2/cfs/yourFolder</pre>
             <p>Required Params:</p>
             <ul>
                 <li>name (string) - The new name of the folder</li>
