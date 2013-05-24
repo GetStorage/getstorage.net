@@ -7,7 +7,7 @@
         "benthedesigner/dropbox": "*",
         "braintree/braintree_php": "2.19.0",
         "jasonlewis/basset": "dev-master",
-        "greggilbert/recaptcha": "dev-master",
+        "greggilbert/recaptcha": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
