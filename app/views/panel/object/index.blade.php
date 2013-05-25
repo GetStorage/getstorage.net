@@ -15,7 +15,7 @@ My Objects
             <thead>
             <tr>
                 <th></th>
-                <th>Name</th>
+                <th>Filename</th>
                 <th>Hits</th>
                 <th>Size</th>
                 <th>Created</th>
@@ -26,7 +26,7 @@ My Objects
             @foreach($objects as $object)
             <tr>
                 <td><span class="<?php if($object->s3) echo 'icon-globe'; ?>"></span></td>
-                <td><a href="http://stor.ag/e/{{$object->name}}" target="_blank">{{$object->name}}</a></td>
+                <td><a href="http://stor.ag/e/{{$object->name}}" target="_blank">{{$object->file}}</a></td>
                 <td>{{ObjectHit::where('object_id', $object->id)->count()}}</td>
                 <td>{{$object->size}}</td>
                 <td>{{$object->created_at}}</td>
