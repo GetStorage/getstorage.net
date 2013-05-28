@@ -14,4 +14,9 @@ class ApiBaseController extends \BaseController {
         $this->user = \User::find($key->user_id);
     }
 
+    public function missingMethod($parameters)
+    {
+        return \Response::json(array('message' => 'Not Found'), 404);
+    }
+
 }
