@@ -40,7 +40,13 @@ if(App::environment() === 'local') {
         Route::resource('key', 'ApiVersionTwo\ApiKeyController');
 
         // We'll need custom routes for our CFS resource
-        Route::get('cfs/(.*)', 'ApiVersionTwo\ApiCfsController@index');
+        //Route::resource('cfs{segments}', 'ApiVersionTwo\ApiCfsController')->where('segments', '(.*)');
+        Route::resource('cfs', 'ApiVersionTwo\ApiCfsController@index');
+        Route::get('cfs{segments}', 'ApiVersionTwo\ApiCfsController@index')->where('segments', '(.*)');
+        Route::post('cfs{segments}', 'ApiVersionTwo\ApiCfsController@store')->where('segments', '(.*)');
+        Route::put('cfs{segments}', 'ApiVersionTwo\ApiCfsController@update')->where('segments', '(.*)');
+        Route::patch('cfs{segments}', 'ApiVersionTwo\ApiCfsController@update')->where('segments', '(.*)');
+        Route::delete('cfs{segments}', 'ApiVersionTwo\ApiCfsController@destroy')->where('segments', '(.*)');
     });
 }
 

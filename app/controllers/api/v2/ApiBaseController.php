@@ -2,7 +2,7 @@
 
 
 namespace ApiVersionTwo;
-
+use Illuminate\Support\Facades\Validator;
 
 class ApiBaseController extends \BaseController {
 
@@ -12,6 +12,14 @@ class ApiBaseController extends \BaseController {
         $requestedKey = (\Request::header('Storage-Key') != false ? \Request::header('Storage-Key') : \Input::get('key'));
         $key = \Key::where('key', $requestedKey)->first();
         $this->user = \User::find($key->user_id);
+
+        Validator::extend('folder', function ($attribute, $value, $parameters) {
+            if (strpbrk($value, "?%*:|\"<>\\") === false) {
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 
     public function missingMethod($parameters)

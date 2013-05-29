@@ -4,7 +4,7 @@
 class CFS extends Eloquent
 {
 
-    protected $hidden = array('id', 'user_id', 's3');
+    protected $hidden = array('id', 'user_id', 'cloud');
 
     protected $table = 'cfs';
 
@@ -35,6 +35,7 @@ class CFS extends Eloquent
     public static function tree($user, $folder = '')
     {
         $all = CFS::where('user_id', $user->id)->get()->toArray();
+        if(count($all) < 1) return null;
 
         foreach ($all as $object) {
             $info = $object;

@@ -2,13 +2,22 @@
 	"require": {
 		"laravel/framework": "4.0.*",
         "barryvdh/laravel-ide-helper": "dev-master",
+
         "cartalyst/sentry": "2.0.*",
+        "cartalyst/api": "1.0.*",
+
         "aws/aws-sdk-php-laravel": "1.*",
         "benthedesigner/dropbox": "*",
         "braintree/braintree_php": "2.19.0",
         "jasonlewis/basset": "dev-master",
         "greggilbert/recaptcha": "dev-master"
 	},
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.cartalyst.com"
+        }
+    ],
 	"autoload": {
 		"classmap": [
 			"app/commands",
