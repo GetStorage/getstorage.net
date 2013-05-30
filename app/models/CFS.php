@@ -8,7 +8,7 @@
 class CFS {
 
     public static function type($path) {
-        if($)
+        //if($)
     }
 
     /**
