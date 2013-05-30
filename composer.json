@@ -5,6 +5,7 @@
 
         "cartalyst/sentry": "2.0.*",
         "cartalyst/api": "1.0.*",
+        "cartalyst/data-grid": "1.0.*",
 
         "aws/aws-sdk-php-laravel": "1.*",
         "benthedesigner/dropbox": "*",
@@ -36,7 +37,8 @@
 			"php artisan optimize"
 		],
 		"post-update-cmd": [
-			"php artisan optimize"
+			"php artisan optimize",
+            "php artisan ide-helper:generate"
 		]
 	},
 	"config": {

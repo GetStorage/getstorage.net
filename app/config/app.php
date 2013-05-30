@@ -119,6 +119,8 @@ return array(
         'Aws\Laravel\AwsServiceProvider',
         'Basset\BassetServiceProvider',
         'Greggilbert\Recaptcha\RecaptchaServiceProvider',
+        'Cartalyst\Api\ApiServiceProvider',
+        'Cartalyst\DataGrid\DataGridServiceProvider',
 
 	),
 
@@ -187,6 +189,11 @@ return array(
 
         'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
         'Basset' => 'Basset\Facade',
+        'API' => 'Cartalyst\Api\Facades\API',
+        'Input'    => 'Cartalyst\Api\Facades\Input',
+        'Request'  => 'Cartalyst\Api\Facades\Request',
+        'Response' => 'Cartalyst\Api\Facades\Response',
+        'DataGrid' => 'Cartalyst\DataGrid\Facades\DataGrid',
 
 	),
 

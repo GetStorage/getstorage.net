@@ -1,12 +1,15 @@
 <?php
 
+/**
+ * This is a helper class for CFSFile and CFSFolder
+ *
+ * Class CFS
+ */
+class CFS {
 
-class CFS extends Eloquent
-{
-
-    protected $hidden = array('id', 'user_id', 'cloud');
-
-    protected $table = 'cfs';
+    public static function type($path) {
+        if($)
+    }
 
     /**
      * Let's make sure we don't have any trailing or useless path seperators
@@ -14,11 +17,10 @@ class CFS extends Eloquent
      * @param $folder
      * @return string
      */
-    public static function cleanFolder($folder)
-    {
+    public static function cleanFolder($folder) {
         $folders = explode('/', $folder);
 
-        if (count($folders) > 0) {
+        if(count($folders) > 0) {
             return implode('/', $folders);
         } else {
             return '';
@@ -32,12 +34,11 @@ class CFS extends Eloquent
      * @param string $folder
      * @return mixed
      */
-    public static function tree($user, $folder = '')
-    {
+    public static function tree($user, $folder = '') {
         $all = CFS::where('user_id', $user->id)->get()->toArray();
         if(count($all) < 1) return null;
 
-        foreach ($all as $object) {
+        foreach($all as $object) {
             $info = $object;
             unset($info['key']);
             if(empty($info['misc'])) $info['misc'] = array();
@@ -130,12 +131,11 @@ class CFS extends Eloquent
      *
      * @return array
      */
-    public static function explodeTree($array, $delimiter = '_', $baseval = false)
-    {
-        if (!is_array($array)) return false;
+    public static function explodeTree($array, $delimiter = '_', $baseval = false) {
+        if(!is_array($array)) return false;
         $splitRE = '/' . preg_quote($delimiter, '/') . '/';
         $returnArr = array();
-        foreach ($array as $key => $val) {
+        foreach($array as $key => $val) {
             // Get parent parts and the current leaf
             $parts = preg_split($splitRE, $key, -1, PREG_SPLIT_NO_EMPTY);
             $leafPart = array_pop($parts);
@@ -143,11 +143,11 @@ class CFS extends Eloquent
             // Build parent structure
             // Might be slow for really deep and large structures
             $parentArr = & $returnArr;
-            foreach ($parts as $part) {
-                if (!isset($parentArr[$part])) {
+            foreach($parts as $part) {
+                if(!isset($parentArr[$part])) {
                     $parentArr[$part] = array();
-                } elseif (!is_array($parentArr[$part])) {
-                    if ($baseval) {
+                } elseif(!is_array($parentArr[$part])) {
+                    if($baseval) {
                         $parentArr[$part] = array('__base_val' => $parentArr[$part]);
                     } else {
                         $parentArr[$part] = array();
@@ -157,12 +157,13 @@ class CFS extends Eloquent
             }
 
             // Add the final part to the structure
-            if (empty($parentArr[$leafPart])) {
+            if(empty($parentArr[$leafPart])) {
                 $parentArr[$leafPart] = $val;
-            } elseif ($baseval && is_array($parentArr[$leafPart])) {
+            } elseif($baseval && is_array($parentArr[$leafPart])) {
                 $parentArr[$leafPart]['__base_val'] = $val;
             }
         }
+
         return $returnArr;
     }
 

@@ -5,7 +5,7 @@
             <li class="{{Request::is('panel/user*') ? 'active' : ''}}"><a href="/panel/user" class="first">Home
                     <small>Overview of your account</small>
                     <i class="icon-angle-right"></i></a></li>
-            <li class="{{Request::is('panel/object*') ? 'active' : ''}}"><a href="/panel/object">Objects
+            <li class="{{Request::is('panel/cfs*') ? 'active' : ''}}"><a href="/panel/cfs">CFS
                     <small>All of your files</small>
                     <i class="icon-angle-right"></i></a></li>
             <li class="{{Request::is('panel/keys*') ? 'active' : ''}}"><a href="/panel/keys">Keys

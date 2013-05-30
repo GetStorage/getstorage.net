@@ -14,9 +14,6 @@
             <li class="{{Request::is('admin/key*') ? 'active' : ''}}">
                 {{HTML::linkAction('AdminKeyController@index', 'Keys')}}
             </li>
-            <li class="{{Request::is('admin/billing*') ? 'active' : ''}}">
-                {{HTML::linkAction('AdminBillingController@index', 'Billing')}}
-            </li>
             <li class="{{Request::is('admin/user*') ? 'active' : ''}}">
                 {{HTML::linkAction('AdminUserController@index', 'Users')}}
             </li>

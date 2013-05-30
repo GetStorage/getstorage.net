@@ -14,24 +14,23 @@ use Response;
  *
  * @package ApiVersionTwo
  */
-class ApiCfsController extends ApiBaseController
-{
+class ApiCfsController extends ApiBaseController {
 
     /**
      * Return a list of all files and folders inside users cfs.
      * This action controls
      * GET /cfs/*
+     *
      * @param null $segments
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index($segments = null)
-    {
+    public function index($segments = null) {
         $fs = \CFS::tree($this->user, $segments);
         if(is_null($fs)) {
             return Response::json(array('message' => 'Resource not found.'), 404);
         }
 
-        return Response::json($fs);
+        return Response::api($fs);
     }
 
 
@@ -39,13 +38,12 @@ class ApiCfsController extends ApiBaseController
      * @param null $segments
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store($segments = null)
-    {
+    public function store($segments = null) {
         // Handle segments
         if(is_null($segments) && !$this->getParam('path')) {
             return Response::json(array('message' => 'A path is required.'), 400);
         }
-        $path = (!is_null($segments)? $segments : $this->getParam('path'));
+        $path = (!is_null($segments) ? $segments : $this->getParam('path'));
         if(!\CFS::validatePath($path)) {
             return Response::json(array('message' => 'Invalid path.'), 400);
         }
@@ -69,12 +67,12 @@ class ApiCfsController extends ApiBaseController
 
         $validator = \Validator::make($finfo, $rules);
 
-        if ($validator->fails()) {
+        if($validator->fails()) {
             return Response::json(array('status' => 'failure', 'messages' => $validator->messages()->toArray()), 409);
         }
 
         $file = Input::file('file')
-            ->move(base_path() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR, $finfo['file']);
+                ->move(base_path() . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR, $finfo['file']);
 
         // save to db
         $cfs = new \CFS();
@@ -96,7 +94,7 @@ class ApiCfsController extends ApiBaseController
         \Queue::push('CFSUploadFile', array('key' => $cfs->key, 'path' => $file->getRealPath()));
 
         // Send object out
-        if ($this->getParam('return', 'json') == 'url') {
+        if($this->getParam('return', 'json') == 'url') {
             $key = str_replace($this->user->username . '/', '', $cfs->key);
 
             return Response::json(array('url' => 'http://' . $this->user->username . '.stor.ag/' . $key));
@@ -112,8 +110,7 @@ class ApiCfsController extends ApiBaseController
      * @param  int $id
      * @return Response
      */
-    public function update($segments = null)
-    {
+    public function update($segments = null) {
         //
     }
 
@@ -123,8 +120,7 @@ class ApiCfsController extends ApiBaseController
      * @param  int $id
      * @return Response
      */
-    public function destroy($segments = null)
-    {
+    public function destroy($segments = null) {
 
     }
 
@@ -133,17 +129,16 @@ class ApiCfsController extends ApiBaseController
      * @param bool $default
      * @return string
      */
-    private function getParam($name, $default = false)
-    {
+    private function getParam($name, $default = false) {
         // Check Request::header, Input::get and other stuff in the future
         $header = \Request::header('CFS-' . $name);
         $input = Input::get($name);
 
 
-        if ($header) return $header;
-        if ($input) return $input;
+        if($header) return $header;
+        if($input) return $input;
 
-        if (!$header && !$input) {
+        if(!$header && !$input) {
             return $default;
         }
     }

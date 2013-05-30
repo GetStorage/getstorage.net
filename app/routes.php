@@ -59,6 +59,7 @@ Route::group(array('prefix' => 'panel', 'before' => 'auth'), function () {
     });
     Route::controller('user', 'UserHomeController');
     Route::resource('object', 'UserObjectController');
+    Route::resource('cfs', 'UserCfsController');
     Route::resource('keys', 'UserKeysController');
 
     Route::controller('billing', 'UserBillingController');
@@ -77,4 +78,5 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin'), function () {
     Route::resource('log', 'AdminLogController');
     Route::resource('object', 'AdminObjectController');
     Route::resource('user', 'AdminUserController');
+    Route::resource('key', 'AdminKeyController');
 });
