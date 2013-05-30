@@ -1,12 +1,4 @@
 <?php
-/**
- * Eyemart Stores Config
- *
- * Configuration file for Eyemart Stores.
- *
- * @author  Luke Strickland <lstrickland@eyemartexpress.com>
- * @package Eyemart${FILE_NAME}
- */
 
 namespace ApiVersionTwo\CFS;
 use Illuminate\Support\Facades\Validator;
