@@ -4,8 +4,8 @@
         "barryvdh/laravel-ide-helper": "dev-master",
 
         "cartalyst/sentry": "2.0.*",
-        "cartalyst/api": "1.0.*",
-        "cartalyst/data-grid": "1.0.*",
+        "GetStorage/Cartalyst-API": "1.0.*",
+        "GetStorage/Cartalyst-DataGrid": "1.0.*",
 
         "aws/aws-sdk-php-laravel": "1.*",
         "benthedesigner/dropbox": "*",
