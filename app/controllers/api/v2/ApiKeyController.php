@@ -1,6 +1,8 @@
 <?php
 
 namespace ApiVersionTwo;
+use Input;
+use Response;
 
 class ApiKeyController extends ApiBaseController {
 
@@ -13,7 +15,7 @@ class ApiKeyController extends ApiBaseController {
 	{
 		$keys = \Key::where('user_id', '=', $this->user->id)->get();
 
-        return \Response::json($keys);
+        return Response::api($keys);
 	}
 
 	/**
@@ -28,7 +30,7 @@ class ApiKeyController extends ApiBaseController {
         $key->user_id = $this->user->id;
         $key->save();
 
-        return \Response::json($key, 201);
+        return Response::api($key, 201);
 	}
 
 	/**
@@ -44,9 +46,9 @@ class ApiKeyController extends ApiBaseController {
         if($key->user_id === $this->user->id) {
             $key->delete();
 
-            return \Response::json(array('message' => 'Key destroyed'));
+            return Response::api(array('message' => 'Key destroyed'));
         } else {
-            return \Response::json(array('message' => 'Invalid key'), 401);
+            return Response::api(array('message' => 'Invalid key'), 401);
         }
 	}
 

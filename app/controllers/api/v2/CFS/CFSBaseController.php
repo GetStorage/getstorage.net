@@ -22,6 +22,6 @@ class CFSBaseController extends \BaseController {
     }
 
     public function missingMethod($parameters) {
-        return \Response::json(array('message' => 'Not Found'), 404);
+        return \Response::api(array('message' => 'Not Found'), 404);
     }
 }

@@ -32,10 +32,13 @@ class CFSFolderController extends CFSBaseController {
             return Response::api("You must specify a path.", 404);
         }
 
-        $rules = array(
-            'name' => 'required'
-        );
+        $folder = Folder::createRecursive($user, explode('/', $path));
 
+        if($folder) {
+            return self::index($path);
+        } else {
+            return Response::api('Failed');
+        }
     }
 
     /**
@@ -45,16 +48,6 @@ class CFSFolderController extends CFSBaseController {
      * @return Response
      */
     public function show($id) {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function edit($id) {
         //
     }
 

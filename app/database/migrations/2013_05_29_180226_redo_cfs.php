@@ -1,7 +1,5 @@
 <?php
 
-die('do not migrate');
-
 use Illuminate\Database\Migrations\Migration;
 
 class RedoCfs extends Migration {
@@ -56,9 +54,14 @@ class RedoCfs extends Migration {
 
                     $folders = explode('/', $file->folder);
                     foreach($folders as $folder) {
+                        $parent = CFSFolder::where('user_id', $file->user_id)->where('name', $file->folder)->first();
+                        $pid = null;
+                        if($parent) $pid = $parent->id;
+
                         CFSFolder::create(array(
                             'name' => $folder,
-                            'user_id' => $file->user_id
+                            'user_id' => $file->user_id,
+                            'parent_id' => $pid
                         ));
                     }
                 } else {
@@ -77,10 +80,11 @@ class RedoCfs extends Migration {
 
             } else {
                 // get the folder id
+                $folder = CFSFolder::where('user_id', $file->user_id)->where('name', $file->folder)->first();
 
                 CFSFile::create(array(
                     'name' => $file->name,
-                    'folder_id' => $replace,
+                    'folder_id' => $folder->id,
                     'user_id' => $file->user_id,
                     'mime' => $file->mime,
                     'secure' => $file->secure,
@@ -88,8 +92,8 @@ class RedoCfs extends Migration {
                     'size' => $file->size,
                     'cloud' => $file->s3,
                 ));
-            }
 
+            }
         }
 
     }

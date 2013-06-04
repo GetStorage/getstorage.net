@@ -41,12 +41,30 @@ if(App::environment() === 'local') {
 
         // We'll need custom routes for our CFS resource
         //Route::resource('cfs{segments}', 'ApiVersionTwo\ApiCfsController')->where('segments', '(.*)');
-        Route::resource('cfs', 'ApiVersionTwo\ApiCfsController@index');
-        Route::get('cfs{segments}', 'ApiVersionTwo\ApiCfsController@index')->where('segments', '(.*)');
-        Route::post('cfs{segments}', 'ApiVersionTwo\ApiCfsController@store')->where('segments', '(.*)');
-        Route::put('cfs{segments}', 'ApiVersionTwo\ApiCfsController@update')->where('segments', '(.*)');
-        Route::patch('cfs{segments}', 'ApiVersionTwo\ApiCfsController@update')->where('segments', '(.*)');
-        Route::delete('cfs{segments}', 'ApiVersionTwo\ApiCfsController@destroy')->where('segments', '(.*)');
+
+        Route::group(array('prefix' => 'cfs'), function() {
+            
+            $type = CFS::type(Request::path());
+
+            if($type === 'folder') {
+                Route::get('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@index')->where('segments', '(.*)');
+                Route::post('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@store')->where('segments', '(.*)');
+                Route::put('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@update')->where('segments', '(.*)');
+                Route::patch('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@update')->where('segments', '(.*)');
+                Route::delete('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@destroy')->where('segments', '(.*)');
+            } elseif($type === 'file') {
+                Route::get('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@index')->where('segments', '(.*)');
+                Route::post('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@store')->where('segments', '(.*)');
+                Route::put('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@update')->where('segments', '(.*)');
+                Route::patch('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@update')->where('segments', '(.*)');
+                Route::delete('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@destroy')->where('segments', '(.*)');
+            } else {
+                return Response::api('Invalid everything.', 404);
+            }
+
+        });
+
+        
     });
 }
 

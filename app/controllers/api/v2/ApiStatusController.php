@@ -1,6 +1,7 @@
 <?php
 
 namespace ApiVersionTwo;
+use Response;
 
 class ApiStatusController extends \BaseController {
 
@@ -11,7 +12,7 @@ class ApiStatusController extends \BaseController {
      */
     public function getIndex() {
 
-        return \Response::json(array('status' => 'ok', 'timestamp' => time()), 200);
+        return Response::api(array('status' => 'ok', 'timestamp' => time()), 200);
     }
 
 }

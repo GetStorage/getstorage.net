@@ -3,13 +3,16 @@
 
 namespace ApiVersionTwo;
 use Illuminate\Support\Facades\Validator;
+use Response;
+use Request;
+use Input;
 
 class ApiBaseController extends \BaseController {
 
     public $user;
 
     public function __construct() {
-        $requestedKey = (\Request::header('Storage-Key') != false ? \Request::header('Storage-Key') : \Input::get('key'));
+        $requestedKey = (Request::header('Storage-Key') != false ? Request::header('Storage-Key') : Input::get('key'));
         $key = \Key::where('key', $requestedKey)->first();
         $this->user = \User::find($key->user_id);
 
@@ -24,7 +27,7 @@ class ApiBaseController extends \BaseController {
 
     public function missingMethod($parameters)
     {
-        return \Response::json(array('message' => 'Not Found'), 404);
+        return Response::api(array('message' => 'Not Found'), 404);
     }
 
 }

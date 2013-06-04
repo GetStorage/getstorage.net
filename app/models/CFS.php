@@ -7,8 +7,36 @@
  */
 class CFS {
 
+    public static function everything($user) {
+        $folders = CFSFolder::where('user_id', $user->id)->get();
+
+        var_dump($folders);
+    }
+
     public static function type($path) {
-        //if($)
+        // Look in our index
+        $index = CFSIndex::get($path);
+        if($index) {
+            return explode('_', $index)[0]; 
+        }
+
+        if(Input::hasFile('file')) {
+
+        } else {
+
+        }
+
+        // Figure it out the old fashioned way
+        if(Request::getMethod() == 'POST') {
+            // Check if there's a file
+            if(Input::hasFile('file')) {
+                return 'file';
+            }
+        }
+
+
+
+            // Request::getMethod()
     }
 
     /**
@@ -35,7 +63,7 @@ class CFS {
      * @return mixed
      */
     public static function tree($user, $folder = '') {
-        $all = CFS::where('user_id', $user->id)->get()->toArray();
+        $all = self::everything($user)->toArray();
         if(count($all) < 1) return null;
 
         foreach($all as $object) {
