@@ -43,9 +43,6 @@ return array(
                 $collection->stylesheet('custom-style.css');
             });
 
-            $directory->apply('CssMin');
-            $directory->apply('UriRewriteFilter');
-
             // Switch to the javascripts directory and require the "coffeescript" directory. As
             // with the above directories we'll apply the CoffeeScript filter to the directory
             // so the built collection contains valid JS.
@@ -59,7 +56,6 @@ return array(
                 $collection->javascript('application.js');
             });
 
-            $directory->apply('JsMin');
         }
 
     ),
