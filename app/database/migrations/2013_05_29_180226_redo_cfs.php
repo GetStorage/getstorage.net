@@ -44,6 +44,8 @@ class RedoCfs extends Migration {
         });
 
         // Now let's migrate the old cfs data
+
+        /*
         $cfs = DB::table('cfs')->get();
         foreach($cfs as $file) {
             if(!empty($file->folder)) {
@@ -95,6 +97,7 @@ class RedoCfs extends Migration {
 
             }
         }
+        */
 
     }
 

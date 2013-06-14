@@ -2,6 +2,7 @@
 
 namespace ApiVersionTwo\CFS;
 use Illuminate\Support\Facades\Validator;
+use Response;
 
 class CFSBaseController extends \BaseController {
 
@@ -12,7 +13,7 @@ class CFSBaseController extends \BaseController {
         $key = \Key::where('key', $requestedKey)->first();
         $this->user = \User::find($key->user_id);
 
-        Validator::extend('folder', function ($attribute, $value, $parameters) {
+        Validator::extend('segment', function ($attribute, $value, $parameters) {
             if(strpbrk($value, "?%*:|\"<>\\") === false) {
                 return true;
             } else {
@@ -22,6 +23,25 @@ class CFSBaseController extends \BaseController {
     }
 
     public function missingMethod($parameters) {
-        return \Response::api(array('message' => 'Not Found'), 404);
+        return Response::api(array('message' => 'Not Found'), 404);
     }
+
+    /**
+     * @param $name
+     * @param bool $default
+     * @return string
+     */
+    public function getParam($name, $default = false) {
+        // Check Request::header, Input::get and other stuff in the future
+        $header = \Request::header('CFS-' . $name);
+        $input = \Input::get($name);
+
+        if(!$header && !$input) {
+            return $default;
+        }
+
+        if($header) return $header;
+        if($input) return $input;
+    }
+
 }

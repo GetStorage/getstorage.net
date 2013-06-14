@@ -3,7 +3,7 @@
 namespace ApiVersionTwo\CFS;
 use Input;
 use Response;
-
+use CFS;
 
 class CFSFolderController extends CFSBaseController {
 
@@ -14,7 +14,7 @@ class CFSFolderController extends CFSBaseController {
      * @return Response
      */
     public function index($path = '') {
-        $cfs = \CFS::tree($this->user, $path);
+        $cfs = CFS\Helper::tree($this->user, $path);
 
         return Response::api($cfs);
     }
@@ -29,12 +29,13 @@ class CFSFolderController extends CFSBaseController {
     public function store($path = null) {
         // Let's do some early checking
         if($path === null) {
-            return Response::api("You must specify a path.", 404);
+            return Response::api('You must specify a path.', 404);
         }
 
         $folder = Folder::createRecursive($user, explode('/', $path));
 
         if($folder) {
+            return API::get('cfs', array('segments' => $path));
             return self::index($path);
         } else {
             return Response::api('Failed');

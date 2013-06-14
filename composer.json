@@ -1,48 +1,52 @@
 {
-	"require": {
-		"laravel/framework": "4.0.*",
+    "require": {
+        "laravel/framework": "4.0.*",
         "barryvdh/laravel-ide-helper": "dev-master",
 
         "cartalyst/sentry": "2.0.*",
-        "GetStorage/Cartalyst-API": "1.0.*",
-        "GetStorage/Cartalyst-DataGrid": "1.0.*",
+        "cartalyst/api": "1.0.*",
+        "cartalyst/data-grid": "1.0.*",
 
         "aws/aws-sdk-php-laravel": "1.*",
         "benthedesigner/dropbox": "*",
         "braintree/braintree_php": "2.19.0",
         "jasonlewis/basset": "dev-master",
         "greggilbert/recaptcha": "dev-master"
-	},
+    },
     "repositories": [
         {
-            "type": "composer",
-            "url": "http://packages.cartalyst.com"
+            "type": "vcs",
+            "url": "https://github.com/GetStorage/Cartalyst-API.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/GetStorage/Cartalyst-DataGrid.git"
         }
     ],
-	"autoload": {
-		"classmap": [
-			"app/commands",
-			"app/controllers",
-			"app/models",
-			"app/database/migrations",
-			"app/database/seeds",
-			"app/tests/TestCase.php"
-		]
-	},
-	"scripts": {
-		"pre-update-cmd": [
-			"php artisan clear-compiled"
-		],
-		"post-install-cmd": [
-			"php artisan optimize"
-		],
-		"post-update-cmd": [
-			"php artisan optimize",
+    "autoload": {
+        "classmap": [
+            "app/commands",
+            "app/controllers",
+            "app/models",
+            "app/database/migrations",
+            "app/database/seeds",
+            "app/tests/TestCase.php"
+        ]
+    },
+    "scripts": {
+        "pre-update-cmd": [
+            "php artisan clear-compiled"
+        ],
+        "post-install-cmd": [
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "php artisan optimize",
             "php artisan ide-helper:generate"
-		]
-	},
-	"config": {
-		"preferred-install": "dist"
-	},
-	"minimum-stability": "dev"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev"
 }

@@ -16,6 +16,8 @@ Route::controller('/docs', 'DocsController');
 
 Route::controller('/account', 'AccountController');
 
+
+/*
 Route::get('/e/{id}', 'ObjectController@getObject');
 
 Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v1', 'before' => 'api'), function () {
@@ -27,6 +29,7 @@ Route::group(array('domain' => 'api.stor.ag', 'prefix' => 'v2', 'before' => 'api
     Route::resource('cfs', 'ApiVersionTwo\ApiCfsController');
     Route::resource('key', 'ApiVersionTwo\ApiKeyController');
 });
+*/
 
 if(App::environment() === 'local') {
     // We only want to register these routes for development, as production would route somewhere else.
@@ -42,27 +45,25 @@ if(App::environment() === 'local') {
         // We'll need custom routes for our CFS resource
         //Route::resource('cfs{segments}', 'ApiVersionTwo\ApiCfsController')->where('segments', '(.*)');
 
-        Route::group(array('prefix' => 'cfs'), function() {
-            
-            $type = CFS::type(Request::path());
 
-            if($type === 'folder') {
-                Route::get('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@index')->where('segments', '(.*)');
-                Route::post('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@store')->where('segments', '(.*)');
-                Route::put('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@update')->where('segments', '(.*)');
-                Route::patch('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@update')->where('segments', '(.*)');
-                Route::delete('cfs{segments}', 'ApiVersionTwo\CFS\CFSFolderController@destroy')->where('segments', '(.*)');
-            } elseif($type === 'file') {
-                Route::get('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@index')->where('segments', '(.*)');
-                Route::post('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@store')->where('segments', '(.*)');
-                Route::put('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@update')->where('segments', '(.*)');
-                Route::patch('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@update')->where('segments', '(.*)');
-                Route::delete('cfs{segments}', 'ApiVersionTwo\CFS\CFSFileController@destroy')->where('segments', '(.*)');
-            } else {
-                return Response::api('Invalid everything.', 404);
-            }
+        $type = \CFS\Helper::type(Request::path());
 
-        });
+        if($type === 'folder') {
+            Route::get('cfs{path}', 'ApiVersionTwo\CFS\CFSFolderController@index')->where('path', '(.*)');
+            Route::post('cfs{path}', 'ApiVersionTwo\CFS\CFSFolderController@store')->where('path', '(.*)');
+            Route::put('cfs{path}', 'ApiVersionTwo\CFS\CFSFolderController@update')->where('path', '(.*)');
+            Route::patch('cfs{path}', 'ApiVersionTwo\CFS\CFSFolderController@update')->where('path', '(.*)');
+            Route::delete('cfs{path}', 'ApiVersionTwo\CFS\CFSFolderController@destroy')->where('path', '(.*)');
+        } elseif($type === 'file') {
+            Route::get('cfs', 'ApiVersionTwo\CFS\CFSFolderController@index');
+            Route::get('cfs{path}', 'ApiVersionTwo\CFS\CFSFileController@index')->where('path', '(.*)');
+            Route::post('cfs{path}', 'ApiVersionTwo\CFS\CFSFileController@store')->where('path', '(.*)');
+            Route::put('cfs{path}', 'ApiVersionTwo\CFS\CFSFileController@update')->where('path', '(.*)');
+            Route::patch('cfs{path}', 'ApiVersionTwo\CFS\CFSFileController@update')->where('path', '(.*)');
+            Route::delete('cfs{path}', 'ApiVersionTwo\CFS\CFSFileController@destroy')->where('path', '(.*)');
+        } else {
+            return Response::api('Operation Failed: CFS Lookup', 500);
+        }
 
         
     });
