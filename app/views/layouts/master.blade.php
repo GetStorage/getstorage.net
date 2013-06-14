@@ -12,6 +12,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
+
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300|Rambla|Calligraffitti">
         {{ basset_stylesheets('application') }}
 
 
@@ -25,7 +27,6 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/icons/114x114.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/icons/72x72.png">
         <link rel="apple-touch-icon-precomposed" href="/assets/img/icons/default.png">
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300|Rambla|Calligraffitti' rel='stylesheet' type='text/css'>
     </head>
 
     <body class="page page-index-static">

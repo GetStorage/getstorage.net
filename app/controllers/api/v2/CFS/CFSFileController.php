@@ -9,17 +9,6 @@ use CFS;
 class CFSFileController extends CFSBaseController {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index($path = '') {
-        $cfs = CFS\Helper::tree($this->user, $path);
-
-        return Response::api($cfs);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @return Response
@@ -88,6 +77,7 @@ class CFSFileController extends CFSBaseController {
         try {
             $nFile->save();
         } catch (\Exception $e) {
+            // We should eventually check before we attempt to insert the record as this does id++
             return Response::api('File already exists.', 409);
         }
 
@@ -125,8 +115,10 @@ class CFSFileController extends CFSBaseController {
      * @param  int $id
      * @return Response
      */
-    public function destroy($id) {
-        //
+    public function destroy($path = null) {
+        if(is_null($path)) {
+            return Response::api('A path is required.', 400);
+        }
     }
 
 }

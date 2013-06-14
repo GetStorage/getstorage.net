@@ -13,7 +13,7 @@ class CFSFolderController extends CFSBaseController {
      * @param string $path
      * @return Response
      */
-    public function index($path = '') {
+    public function index($path = null) {
         $cfs = CFS\Helper::tree($this->user, $path);
 
         return Response::api($cfs);
