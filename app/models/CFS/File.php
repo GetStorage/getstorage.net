@@ -20,7 +20,17 @@ class File extends Eloquent {
 
     // Mutators
     public function path() {
-        return $this->attributes[''];
+        $parent = Folder::where('id', $this->attributes['folder_id'])->first();
+
+        $path = $parent->name;
+
+        if($parent->parent_id != null) {
+            // loop until we find null, creating the path as we go.
+            $subParent = Folder::where('id', $parent->parent_id);
+            
+        }
+
+        return $path . '/' . $this->name;
     }
 
 

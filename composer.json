@@ -15,12 +15,8 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/GetStorage/Cartalyst-API.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/GetStorage/Cartalyst-DataGrid.git"
+            "type": "composer",
+            "url": "http://packages.cartalyst.com"
         }
     ],
     "autoload": {

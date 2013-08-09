@@ -17,8 +17,11 @@ class CFSFileController extends CFSBaseController {
         // Rough Draft:
 
         // Quick Sanity Check
-        if(is_null($path)) {
+        if(is_null($path) || $path == '') {
             return Response::api('A path is required.', 400);
+        }
+        if(!Input::hasFile('file')) {
+            return Response::api('A file is required.', 400);
         }
 
         // Set what we'll need
@@ -40,7 +43,13 @@ class CFSFileController extends CFSBaseController {
         $finfo = array();
         $finfo['file'] = $this->getParam('file', Input::file('file'));
         $finfo['name'] = $filename;
-        $finfo['folder_id'] = CFS\Folder::createRecursive($this->user, $folders);
+
+        if(str_contains($path, '/')) {
+            $finfo['folder_id'] = CFS\Folder::createRecursive($this->user, $folders);    
+        } else {
+            $finfo['folder_id'] = null;
+        }
+        
         $finfo['user_id'] = $this->user->id;
         $finfo['mime'] = $this->getParam('mime', Input::file('file')->getMimeType());
         $finfo['secure'] = $this->getParam('secure', false);

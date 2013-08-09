@@ -7,11 +7,7 @@
             Storage
             @show</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!-- @todo: fill with your company info or remove -->
-        <meta name="description" content="">
-        <meta name="author" content="">
-
+        <meta name="description" content="Storage is an online file system for your stuff. ">
 
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,700,300|Rambla|Calligraffitti">
         {{ basset_stylesheets('application') }}
@@ -139,12 +135,10 @@
                 <div class="row">
                     <div class="span3 col">
                         <div class="block contact-block">
-                            <!--@todo: replace with company contact details-->
                             <h3>Contact Us</h3>
                             <address>
-                                <p><abbr title="IRC"><i class="icon-group"></i></abbr> irc.esper.net #storage</p>
-
-                                <p><abbr title="Email"><i class="icon-envelope"></i></abbr> help@getstorage.net</p>
+                                <p><abbr title="Internet Relay Chat"><i class="icon-group"></i></abbr> <a href="http://webchat.esper.net/?nick=&channels=storage" target="_blank">irc.esper.net #storage</a></p>
+                                <p><abbr title="Email"><i class="icon-envelope"></i></abbr> <a href="mailto:help@getstorage.net">help@getstorage.net</a></p>
                             </address>
                         </div>
                     </div>
@@ -152,7 +146,7 @@
                         <div class="block">
                             <h3>About Us</h3>
 
-                            <p>Storage is an awesome mixture of file hosting, and a filesystem for the web. </p>
+                            <p>Storage is an online file system for your stuff, use one of our many apps for managing your files, or dive into <a href="/docs/api">our API</a>.</p>
                         </div>
                     </div>
                     <div class="span4 col">
@@ -160,14 +154,11 @@
                             <h3>Placeholder</h3>
 
                             <p>Something will go here in the future.</p>
-
                         </div>
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div id="toplink"><a href="#top" class="top-link" title="Back to top">Back To Top
-                            <i class="icon-chevron-up"></i></a></div>
-                    <!--@todo: replace with company copyright details-->
+                    <div id="toplink"><a href="#top" class="top-link" title="Back to top">Back To Top <i class="icon-chevron-up"></i></a></div>
                     <div class="subfooter">
                         <div class="span6">
                             <p>Copyright 2013 &copy; <a href="http://axxim.net/">Axxim, LLC</a></p>

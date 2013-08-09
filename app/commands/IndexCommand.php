@@ -37,8 +37,26 @@ class IndexCommand extends Command {
      */
     public function fire()
     {
-        CFSIndex::clear();
-        //$all = CFS::all();
+        $index = array();
+        $all = \CFS\Folder::all();
+
+        \CFS\Index::clear();
+
+        $path = '';
+        
+        // Loop through all of our folders and all of their files.
+        foreach($all as $folder) {
+            $path .= $folder->name;
+
+            $files = $folder->files()->get();
+            foreach($files as $file) {
+                // Add files to index
+                $index .= '/'.$file->name;
+            }
+
+        }
+
+        dd($index);
     }
 
     /**
@@ -48,7 +66,7 @@ class IndexCommand extends Command {
      */
     protected function getArguments()
     {
-
+        return array();
     }
 
     /**
@@ -58,7 +76,7 @@ class IndexCommand extends Command {
      */
     protected function getOptions()
     {
-
+        return array();
     }
 
 }

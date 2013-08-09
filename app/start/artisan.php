@@ -11,4 +11,4 @@
 |
 */
 
-//Artisan::add(new IndexCommand);
+Artisan::add(new IndexCommand);

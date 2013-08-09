@@ -12,29 +12,13 @@ use Request;
 class Helper {
 
     public static function type($path) {
+        // Clean the path
+        $segments = explode('/', $path);
+        //$path = implode('/', array_slice($segments, $path));
+
         // Look in our index
-        $index = Index::get($path);
-        if($index) {
-            return explode('_', $index)[0]; 
-        }
+        $file = File::where('path', $path)->first();
 
-        if(Input::hasFile('file')) {
-
-        } else {
-
-        }
-
-        // Figure it out the old fashioned way
-        if(Request::getMethod() == 'POST') {
-            // Check if there's a file
-            if(Input::hasFile('file')) {
-                return 'file';
-            }
-        }
-
-
-
-            // Request::getMethod()
 
         return 'file';
     }
@@ -78,7 +62,6 @@ class Helper {
 
                 $all[$folder->name][$name] = $file;
             }
-
         }
 
         return $all;

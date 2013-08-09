@@ -64,8 +64,6 @@ if(App::environment() === 'local') {
         } else {
             return Response::api('Operation Failed: CFS Lookup', 500);
         }
-
-        
     });
 }
 
