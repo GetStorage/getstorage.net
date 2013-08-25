@@ -1,9 +1,14 @@
 <?php
 
-class UserDropboxController extends BaseController {
+namespace Panel;
+
+use Config;
+use Input;
+
+class DropboxController extends BaseController {
 
     public function getIndex() {
-        $user = Sentry::getUser();
+        $user = $this->user;
 
         $callback = 'http://getstorage.dev/panel/dropbox';
         $encrypter = new \Dropbox\OAuth\Storage\Encrypter(Config::get('app.key'));

@@ -1,6 +1,10 @@
 <?php
 
-class UserBillingController extends BaseController {
+namespace Panel;
+
+use View;
+
+class BillingController extends BaseController {
     
     public function getIndex() {
 

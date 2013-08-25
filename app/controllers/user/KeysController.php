@@ -1,6 +1,13 @@
 <?php
 
-class UserKeysController extends BaseController {
+namespace Panel;
+
+use Key;
+use Sentry;
+use View;
+use Redirect;
+
+class KeysController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +16,7 @@ class UserKeysController extends BaseController {
 	 */
 	public function index()
 	{
-		$keys = Key::where('user_id', Sentry::getUser()->id)->get();
+		$keys = Key::where('user_id', $this->user->id)->get();
 
         return View::make('panel.keys.index', array('keys' => $keys));
 	}
@@ -33,7 +40,7 @@ class UserKeysController extends BaseController {
 	{
         $key = new Key();
         $key->key = Key::generateKey();
-        $key->user_id = Sentry::getUser()->id;
+        $key->user_id = $this->user->id;
         $key->save();
 
         return Redirect::back();
@@ -82,7 +89,7 @@ class UserKeysController extends BaseController {
 	{
 		$key = Key::where('id', $id)->first();
 
-        if($key->user_id === Sentry::getUser()->id) {
+        if($key->user_id === $this->user->id) {
             $key->delete();
         }
 

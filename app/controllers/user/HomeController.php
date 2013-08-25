@@ -1,6 +1,10 @@
 <?php
 
-class UserHomeController extends BaseController {
+namespace Panel;
+
+use View;
+
+class HomeController extends BaseController {
 
     public function getIndex() {
         return View::make('panel.user.index');

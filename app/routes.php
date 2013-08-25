@@ -75,17 +75,17 @@ Route::group(array('prefix' => 'panel', 'before' => 'auth'), function () {
     Route::get('/', function () {
         return Redirect::to('/panel/user');
     });
-    Route::controller('user', 'UserHomeController');
-    Route::resource('object', 'UserObjectController');
-    Route::resource('cfs', 'UserCfsController');
-    Route::resource('keys', 'UserKeysController');
+    Route::controller('user', 'Panel\HomeController');
+    Route::resource('object', 'Panel\ObjectController');
+    Route::resource('cfs', 'Panel\CfsController');
+    Route::resource('keys', 'Panel\KeysController');
 
-    Route::controller('billing', 'UserBillingController');
+    Route::controller('billing', 'Panel\BillingController');
 
     // Apps
     //Route::controller('dropbox', 'UserDropboxController');
 
-    Route::get('settings', 'UserHomeController@getSettings');
+    Route::get('settings', 'Panel\HomeController@getSettings');
 });
 
 /**

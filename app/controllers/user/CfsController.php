@@ -1,6 +1,13 @@
 <?php
 
-class UserCfsController extends BaseController {
+namespace Panel;
+
+use API;
+use DataGrid;
+use Paginator;
+use View;
+
+class CfsController extends BaseController {
 
     /**
      * Display a listing of the resource.
@@ -9,7 +16,7 @@ class UserCfsController extends BaseController {
      */
     public function index() {
 
-        $key = User::find(Sentry::getUser()->id)->first()->keys;
+        $key = $this->user->keys;
         if(count($key) > 0) {
 
             $primary = $key[0]->key;

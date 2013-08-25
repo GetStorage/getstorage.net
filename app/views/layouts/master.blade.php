@@ -78,7 +78,7 @@
                             </li>
                             <li class="divider-vertical"></li>
                             @endif
-                            <li>{{HTML::linkAction('UserHomeController@getIndex', 'Panel', null, array('class' => 'btn
+                            <li>{{HTML::linkAction('Panel\HomeController@getIndex', 'Panel', null, array('class' => 'btn
                                 btn-primary signup'))}}
                             </li>
                             <li>{{HTML::linkAction('AccountController@getLogout', 'Logout', null, array('class' => 'btn
