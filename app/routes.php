@@ -46,7 +46,8 @@ if(App::environment() === 'local') {
         //Route::resource('cfs{segments}', 'ApiVersionTwo\ApiCfsController')->where('segments', '(.*)');
 
 
-        $type = \CFS\Helper::type(Request::path());
+        //$type = \CFS\Helper::type(Request::path());
+        $type = 'file';
 
         if($type === 'folder') {
             Route::get('cfs{path}', 'ApiVersionTwo\CFS\CFSFolderController@index')->where('path', '(.*)');

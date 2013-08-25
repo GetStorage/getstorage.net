@@ -10,26 +10,31 @@ class UserCfsController extends BaseController {
     public function index() {
 
         $key = User::find(Sentry::getUser()->id)->first()->keys;
-        $primary = $key[0]->key;
+        if(count($key) > 0) {
 
-        $cfs = API::get('cfs', array('key' => $primary));
+            $primary = $key[0]->key;
 
-        $dataGrid = DataGrid::make($cfs, array('name', 'type', 'mime', 'visibility', 'updated_at', 'created_at'));
-        $dataHandler = $dataGrid->getDataHandler();
-        if ($results = $dataHandler->getResults())
-        {
-            // Get the amount of pages.
-            $pagesCount = $dataHandler->getPagesCount();
+            $cfs = API::get('cfs', array('key' => $primary));
 
-            // Calculate the per page.
-            $perPage = floor(count($cfs) / $pagesCount);
+            $dataGrid = DataGrid::make($cfs, array('name', 'type', 'mime', 'visibility', 'updated_at', 'created_at'));
+            $dataHandler = $dataGrid->getDataHandler();
+            if ($results = $dataHandler->getResults())
+            {
+                // Get the amount of pages.
+                $pagesCount = $dataHandler->getPagesCount();
 
-            // Manually create pagination.
-            $paginator = Paginator::make($results, count($cfs), $perPage);
+                // Calculate the per page.
+                $perPage = floor(count($cfs) / $pagesCount);
 
-            // Build and output the view.
-            return View::make('panel.cfs.index', compact('results', 'paginator'));
+                // Manually create pagination.
+                $paginator = Paginator::make($results, count($cfs), $perPage);
+
+                // Build and output the view.
+                return View::make('panel.cfs.index', compact('results', 'paginator'));
+            }
+
         }
+
 
         return View::make('panel.cfs.index');
     }

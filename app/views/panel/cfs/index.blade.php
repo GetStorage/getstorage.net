@@ -10,6 +10,7 @@ CFS
     @include('panel.partial.navigation')
     <div class="span9">
 
+        @if(isset($results))
         <table class="table">
             <thead>
                 <tr>
@@ -33,6 +34,10 @@ CFS
         </table>
 
         {{ $paginator->links() }}
+
+        @else
+        <p>You don't have anything stored.</p>
+        @endif
 
     </div>
 </div>
