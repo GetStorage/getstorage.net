@@ -1,9 +1,10 @@
 <?php
 
-namespace ApiVersionTwo;
+namespace ApiVersionOne;
+
 use Response;
 
-class ApiStatusController extends \BaseController {
+class StatusController extends BaseController {
 
     /**
      * Returns the status of the api, currently only good for checking if the service is down.
@@ -12,7 +13,7 @@ class ApiStatusController extends \BaseController {
      */
     public function getIndex() {
 
-        return Response::api(array('status' => 'ok', 'timestamp' => time()), 200);
+        return Response::json(array('status' => 'ok', 'timestamp' => time()), 200);
     }
 
 }

@@ -1,6 +1,13 @@
 <?php
 
-class AdminHomeController extends BaseController {
+namespace Admin;
+
+use Object;
+use ObjectHit;
+use Sentry;
+use View;
+
+class HomeController extends BaseController {
 
     public function getIndex() {
         $objects = Object::all()->count();

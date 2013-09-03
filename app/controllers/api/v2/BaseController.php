@@ -2,12 +2,13 @@
 
 
 namespace ApiVersionTwo;
-use Illuminate\Support\Facades\Validator;
+
+use Validator;
 use Response;
 use Request;
 use Input;
 
-class ApiBaseController extends \BaseController {
+class BaseController extends \Controller {
 
     public $user;
 

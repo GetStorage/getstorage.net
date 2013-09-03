@@ -1,6 +1,13 @@
 <?php
 
-class AdminUserController extends BaseController {
+namespace Admin;
+
+use Object;
+use View;
+use Response;
+use ObjectHit;
+
+class AdminObjectController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,9 +16,9 @@ class AdminUserController extends BaseController {
 	 */
 	public function index()
 	{
-        $users = Sentry::getUserProvider()->findAll();
+		$objects = Object::all();
 
-        return View::make('admin.user.index', array('users' => $users));
+        return View::make('admin.object.index', array('objects' => $objects));
 	}
 
 	/**
@@ -37,12 +44,15 @@ class AdminUserController extends BaseController {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  string  $name
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($name)
 	{
-		//
+		$object = Object::where('name', $name)->first();
+        $analytics = ObjectHit::where('object_id', $object->id)->get();
+
+        return View::make('admin.object.show', array('object' => $object, 'analytics' => $analytics));
 	}
 
 	/**

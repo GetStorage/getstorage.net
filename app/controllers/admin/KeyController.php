@@ -1,6 +1,10 @@
 <?php
 
-class AdminKeyController extends BaseController {
+namespace Admin;
+
+use Response;
+
+class KeyController extends BaseController {
 
     /**
      * Display a listing of the resource.

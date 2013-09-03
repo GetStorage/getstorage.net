@@ -1,17 +1,22 @@
 <?php
 
 namespace ApiVersionTwo\CFS;
-use Illuminate\Support\Facades\Validator;
+
+use Cartalyst\Api\Facades\Input;
+use Key;
+use Request;
+use User;
+use Validator;
 use Response;
 
-class CFSBaseController extends \BaseController {
+class BaseController extends \ProtectedController {
 
     public $user;
 
     public function __construct() {
-        $requestedKey = (\Request::header('Storage-Key') != false ? \Request::header('Storage-Key') : \Input::get('key'));
-        $key = \Key::where('key', $requestedKey)->first();
-        $this->user = \User::find($key->user_id);
+        $requestedKey = (Request::header('Storage-Key') != false ? Request::header('Storage-Key') : Input::get('key'));
+        $key = Key::where('key', $requestedKey)->first();
+        $this->user = User::find($key->user_id);
 
         Validator::extend('segment', function ($attribute, $value, $parameters) {
             if(strpbrk($value, "?%*:|\"<>\\") === false) {
@@ -33,8 +38,8 @@ class CFSBaseController extends \BaseController {
      */
     public function getParam($name, $default = false) {
         // Check Request::header, Input::get and other stuff in the future
-        $header = \Request::header('CFS-' . $name);
-        $input = \Input::get($name);
+        $header = Request::header('CFS-' . $name);
+        $input = Input::get($name);
 
         if(!$header && !$input) {
             return $default;

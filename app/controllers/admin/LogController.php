@@ -1,6 +1,12 @@
 <?php
 
-class AdminLogController extends BaseController {
+namespace Admin;
+
+use SiteLog;
+use View;
+use Response;
+
+class LogController extends BaseController {
 
     /**
      * Display a listing of the resource.

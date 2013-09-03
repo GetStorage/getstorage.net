@@ -6,7 +6,7 @@ use Validator;
 use Input;
 use CFS;
 
-class CFSFileController extends CFSBaseController {
+class FileController extends BaseController {
 
     /**
      * Store a newly created resource in storage.

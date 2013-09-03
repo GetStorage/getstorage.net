@@ -14,7 +14,7 @@ use Response;
  *
  * @package ApiVersionTwo
  */
-class ApiCfsController extends ApiBaseController {
+class CfsController extends BaseController {
 
     /**
      * Return a list of all files and folders inside users cfs.

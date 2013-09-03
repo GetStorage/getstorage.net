@@ -5,7 +5,7 @@ use Input;
 use Response;
 use CFS;
 
-class CFSFolderController extends CFSBaseController {
+class FolderController extends BaseController {
 
     /**
      * Display a full tree of everything in the path

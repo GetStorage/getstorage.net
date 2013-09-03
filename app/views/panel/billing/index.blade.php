@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Settings
+Billing
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@ Settings
 
         <p>Storage isn't currently ready for subscriptions, in the mean time feel free to support us on Gittip!</p>
 
-        <script data-gittip-username="getstorage"
+        <script data-gittip-username="GetStorage"
                 src="//gttp.co/v1.js"></script>
 
     </div>

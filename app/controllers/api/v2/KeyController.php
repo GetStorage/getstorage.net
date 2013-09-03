@@ -4,7 +4,7 @@ namespace ApiVersionTwo;
 use Input;
 use Response;
 
-class ApiKeyController extends ApiBaseController {
+class KeyController extends BaseController {
 
 	/**
 	 * Get all the keys from the user
