@@ -52,7 +52,7 @@ class DocsController extends BaseController {
             return Redirect::action('DocsController@getLegal')->withErrors($validator);
         }
 
-        Mail::send('emails.docs.legal', Input::all(), function($m) {
+        Mail::send('emails.docs.legal', Input::all(), function ($m) {
             $m->to('legal@getstorage.net', 'Legal Hotline')->subject('Legal Notice');
         });
 
@@ -60,9 +60,10 @@ class DocsController extends BaseController {
     }
 
     public function getApi($version) {
-        if(strlen($version) != 2) App::abort(404);
+        if (strlen($version) != 2) {
+            App::abort(404);
+        }
 
-        return View::make('docs.api.'.$version);
+        return View::make('docs.api.' . $version);
     }
-
 }

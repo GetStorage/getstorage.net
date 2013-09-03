@@ -11,4 +11,8 @@ namespace Admin;
 
 class BaseController extends \Controller {
 
+    public function __construct() {
+
+    }
+
 }

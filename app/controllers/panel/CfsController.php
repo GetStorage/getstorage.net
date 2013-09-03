@@ -6,6 +6,7 @@ use API;
 use DataGrid;
 use Paginator;
 use View;
+use Response;
 
 class CfsController extends BaseController {
 
@@ -17,7 +18,7 @@ class CfsController extends BaseController {
     public function index() {
 
         $key = $this->user->keys;
-        if(count($key) > 0) {
+        if (count($key) > 0) {
 
             $primary = $key[0]->key;
 
@@ -25,8 +26,7 @@ class CfsController extends BaseController {
 
             $dataGrid = DataGrid::make($cfs, array('name', 'type', 'mime', 'visibility', 'updated_at', 'created_at'));
             $dataHandler = $dataGrid->getDataHandler();
-            if ($results = $dataHandler->getResults())
-            {
+            if ($results = $dataHandler->getResults()) {
                 // Get the amount of pages.
                 $pagesCount = $dataHandler->getPagesCount();
 
@@ -39,7 +39,6 @@ class CfsController extends BaseController {
                 // Build and output the view.
                 return View::make('panel.cfs.index', compact('results', 'paginator'));
             }
-
         }
 
 
@@ -49,21 +48,20 @@ class CfsController extends BaseController {
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
     public function show($id) {
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $name
+     * @param  string $name
+     *
      * @return Response
      */
     public function destroy($name) {
-
     }
-
 }

@@ -1,25 +1,21 @@
 <?php
 
 
-class AccountController extends BaseController
-{
+class AccountController extends BaseController {
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->beforeFilter('guest', ['only' => ['getLogin', 'postLogin', 'getRegister', 'postRegister']]);
     }
 
-    public function getLogin()
-    {
+    public function getLogin() {
         return View::make('account.login');
     }
 
-    public function postLogin()
-    {
+    public function postLogin() {
         $input = Input::all();
 
         $rules = array(
-            'email'    => 'required|email',
+            'email' => 'required|email',
             'password' => 'required'
         );
 
@@ -32,7 +28,7 @@ class AccountController extends BaseController
         try {
             // Set login credentials
             $credentials = array(
-                'email'    => $input['email'],
+                'email' => $input['email'],
                 'password' => $input['password'],
             );
 
@@ -54,7 +50,7 @@ class AccountController extends BaseController
             return Redirect::to('account/login')->withErrors(['User is not activated.']);
         }
 
-        // The following is only required if throttle is enabled
+            // The following is only required if throttle is enabled
         catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
             return Redirect::to('account/login')->withErrors(['User is suspended.']);
         }
@@ -63,19 +59,17 @@ class AccountController extends BaseController
         }
     }
 
-    public function getRegister()
-    {
+    public function getRegister() {
         return View::make('account.register');
     }
 
-    public function postRegister()
-    {
+    public function postRegister() {
         $input = Input::all();
 
         $rules = array(
-            'username'         => 'required|min:2|max:32|unique:users',
-            'email'            => 'required|email|unique:users',
-            'password'         => 'required|min:6',
+            'username' => 'required|min:2|max:32|unique:users',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
             'password_confirm' => 'required|same:password',
         );
 
@@ -88,10 +82,10 @@ class AccountController extends BaseController
         try {
             $user = Sentry::register(
                 array(
-                     'username'   => mb_strtolower($input['username']),
-                     'email'      => $input['email'],
-                     'password'   => $input['password'],
-                     'newsletter' => ($input['newsletter'] == 1)
+                    'username' => mb_strtolower($input['username']),
+                    'email' => $input['email'],
+                    'password' => $input['password'],
+                    'newsletter' => ($input['newsletter'] == 1)
                 )
             );
             $activationCode = $user->getActivationCode();
@@ -99,20 +93,16 @@ class AccountController extends BaseController
             Event::fire('user.register', array($user, $activationCode));
 
             return Redirect::to('account/thanks');
-
         } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
             return Redirect::to('account/register')->withErrors(['User with this login already exists.']);
         }
-
     }
 
-    public function getThanks()
-    {
+    public function getThanks() {
         return View::make('account.thanks');
     }
 
-    public function getValidate($email, $key)
-    {
+    public function getValidate($email, $key) {
         try {
             // Find the user using the user id
             $user = Sentry::getUserProvider()->findByLogin($email);
@@ -133,13 +123,11 @@ class AccountController extends BaseController
         }
     }
 
-    public function getForgot()
-    {
+    public function getForgot() {
         return View::make('account.forgot');
     }
 
-    public function postForgot()
-    {
+    public function postForgot() {
         $input = Input::all();
 
         $rules = array(
@@ -166,25 +154,22 @@ class AccountController extends BaseController
         }
     }
 
-    public function getResetting()
-    {
+    public function getResetting() {
         return View::make('account.resetting');
     }
 
-    public function getReset($email, $code)
-    {
+    public function getReset($email, $code) {
         return View::make('account.reset', array('email' => $email, 'code' => $code));
     }
 
-    public function postReset()
-    {
+    public function postReset() {
         $input = Input::all();
 
         $rules = array(
-            'email'            => 'required|email',
-            'password'         => 'required|min:6',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
             'password_confirm' => 'required|same:password',
-            'code'             => 'required'
+            'code' => 'required'
         );
 
         $validator = Validator::make($input, $rules);
@@ -215,11 +200,9 @@ class AccountController extends BaseController
         }
     }
 
-    public function getLogout()
-    {
+    public function getLogout() {
         Sentry::logout();
 
         return Redirect::to('');
     }
-
 }

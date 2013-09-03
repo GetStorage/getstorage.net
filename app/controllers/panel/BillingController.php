@@ -5,7 +5,7 @@ namespace Panel;
 use View;
 
 class BillingController extends BaseController {
-    
+
     public function getIndex() {
 
         return View::make('panel.billing.index');
@@ -15,7 +15,6 @@ class BillingController extends BaseController {
 
         return View::make('panel.billing.thanks');
     }
-
     /*
     public function postCoinbase() {
         // Coming Soon
@@ -49,5 +48,4 @@ class BillingController extends BaseController {
         }
     }
     */
-
 }

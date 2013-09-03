@@ -4,7 +4,9 @@
 class ObjectController extends BaseController {
 
     public function getObject($name) {
-        if(!$name) return Redirect::to('/');
+        if (!$name) {
+            return Redirect::to('/');
+        }
 
         $object = Object::where('name', $name)->first();
 
@@ -23,5 +25,4 @@ class ObjectController extends BaseController {
 
         return $response;
     }
-
 }

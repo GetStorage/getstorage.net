@@ -2,9 +2,9 @@
 
 namespace Admin;
 
+use Response;
 use SiteLog;
 use View;
-use Response;
 
 class LogController extends BaseController {
 
@@ -22,7 +22,8 @@ class LogController extends BaseController {
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
     public function show($id) {
@@ -30,5 +31,4 @@ class LogController extends BaseController {
 
         return View::make('admin.log.show', array('log' => $log));
     }
-
 }

@@ -13,5 +13,4 @@ class HomeController extends BaseController {
     public function getSettings() {
         return View::make('panel.user.settings');
     }
-
 }

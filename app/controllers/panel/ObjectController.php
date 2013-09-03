@@ -3,11 +3,11 @@
 namespace User;
 
 use Object;
-use Sentry;
-use View;
 use ObjectHit;
-use Redirect;
 use Queue;
+use Redirect;
+use View;
+use Response;
 
 class ObjectController extends BaseController {
 
@@ -25,7 +25,8 @@ class ObjectController extends BaseController {
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
     public function show($id) {
@@ -38,7 +39,8 @@ class ObjectController extends BaseController {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $name
+     * @param  string $name
+     *
      * @return Response
      */
     public function destroy($name) {
@@ -49,5 +51,4 @@ class ObjectController extends BaseController {
 
         return Redirect::action('UserObjectController@index');
     }
-
 }

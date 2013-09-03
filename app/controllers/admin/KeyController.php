@@ -11,9 +11,7 @@ class KeyController extends BaseController {
      *
      * @return Response
      */
-    public function index()
-    {
-
+    public function index() {
     }
 
     /**
@@ -21,8 +19,7 @@ class KeyController extends BaseController {
      *
      * @return Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -31,53 +28,50 @@ class KeyController extends BaseController {
      *
      * @return Response
      */
-    public function store()
-    {
+    public function store() {
         //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  string  $name
+     * @param  string $name
+     *
      * @return Response
      */
-    public function show($name)
-    {
-
+    public function show($name) {
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function update($id)
-    {
+    public function update($id) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
-
 }
