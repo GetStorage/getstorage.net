@@ -1,6 +1,7 @@
 <?php
 
 namespace ApiVersionTwo;
+
 use Response;
 
 class StatusController extends BaseController {
@@ -14,5 +15,4 @@ class StatusController extends BaseController {
 
         return Response::api(array('status' => 'ok', 'timestamp' => time()), 200);
     }
-
 }

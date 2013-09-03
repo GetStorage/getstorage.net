@@ -1,6 +1,7 @@
 <?php
 
 namespace ApiVersionTwo\CFS;
+
 use Response;
 use Validator;
 use Input;
@@ -11,16 +12,18 @@ class FileController extends BaseController {
     /**
      * Store a newly created resource in storage.
      *
+     * @param null $path
+     *
      * @return Response
      */
     public function store($path = null) {
         // Rough Draft:
 
         // Quick Sanity Check
-        if(is_null($path) || $path == '') {
+        if (is_null($path) || $path == '') {
             return Response::api('A path is required.', 400);
         }
-        if(!Input::hasFile('file')) {
+        if (!Input::hasFile('file')) {
             return Response::api('A file is required.', 400);
         }
 
@@ -31,10 +34,10 @@ class FileController extends BaseController {
         $folders = $segments;
 
         // Validate file
-        if(!CFS\Folder::ok($folders)) {
+        if (!CFS\Folder::ok($folders)) {
             return Response::api('Folder is not ok.', 400);
         }
-        if(!CFS\File::ok($filename)) {
+        if (!CFS\File::ok($filename)) {
             return Response::api('File is not ok.', 400);
         }
 
@@ -44,29 +47,29 @@ class FileController extends BaseController {
         $finfo['file'] = $this->getParam('file', Input::file('file'));
         $finfo['name'] = $filename;
 
-        if(str_contains($path, '/')) {
-            $finfo['folder_id'] = CFS\Folder::createRecursive($this->user, $folders);    
+        if (str_contains($path, '/')) {
+            $finfo['folder_id'] = CFS\Folder::createRecursive($this->user, $folders);
         } else {
             $finfo['folder_id'] = null;
         }
-        
+
         $finfo['user_id'] = $this->user->id;
         $finfo['mime'] = $this->getParam('mime', Input::file('file')->getMimeType());
         $finfo['secure'] = $this->getParam('secure', false);
         $finfo['visibility'] = $this->getParam('visibility', 'public');
 
         $rules = array(
-            'file' => 'required', 
-            'name' => 'required|min:1|max:255', 
-            'folder' => 'folder|min:1|max:255', 
-            'mime' => 'required', 
-            'secure' => 'required', 
+            'file' => 'required',
+            'name' => 'required|min:1|max:255',
+            'folder' => 'folder|min:1|max:255',
+            'mime' => 'required',
+            'secure' => 'required',
             'visibility' => 'required'
         );
 
         $validator = Validator::make($finfo, $rules);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return Response::api($validator->messages(), 400);
         }
 
@@ -102,6 +105,7 @@ class FileController extends BaseController {
      * Display the specified resource.
      *
      * @param  int $id
+     *
      * @return Response
      */
     public function show($id) {
@@ -112,6 +116,7 @@ class FileController extends BaseController {
      * Update the specified resource in storage.
      *
      * @param  int $id
+     *
      * @return Response
      */
     public function update($id) {
@@ -121,13 +126,13 @@ class FileController extends BaseController {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  null $path
+     *
      * @return Response
      */
     public function destroy($path = null) {
-        if(is_null($path)) {
+        if (is_null($path)) {
             return Response::api('A path is required.', 400);
         }
     }
-
 }

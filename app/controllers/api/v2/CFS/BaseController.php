@@ -5,35 +5,19 @@ namespace ApiVersionTwo\CFS;
 use Cartalyst\Api\Facades\Input;
 use Key;
 use Request;
-use User;
-use Validator;
 use Response;
+use User;
 
 class BaseController extends \ProtectedController {
-
-    public $user;
-
-    public function __construct() {
-        $requestedKey = (Request::header('Storage-Key') != false ? Request::header('Storage-Key') : Input::get('key'));
-        $key = Key::where('key', $requestedKey)->first();
-        $this->user = User::find($key->user_id);
-
-        Validator::extend('segment', function ($attribute, $value, $parameters) {
-            if(strpbrk($value, "?%*:|\"<>\\") === false) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-    }
 
     public function missingMethod($parameters) {
         return Response::api(array('message' => 'Not Found'), 404);
     }
 
     /**
-     * @param $name
+     * @param      $name
      * @param bool $default
+     *
      * @return string
      */
     public function getParam($name, $default = false) {
@@ -41,12 +25,15 @@ class BaseController extends \ProtectedController {
         $header = Request::header('CFS-' . $name);
         $input = Input::get($name);
 
-        if(!$header && !$input) {
+        if (!$header && !$input) {
             return $default;
         }
 
-        if($header) return $header;
-        if($input) return $input;
+        if ($header) {
+            return $header;
+        }
+        if ($input) {
+            return $input;
+        }
     }
-
 }
